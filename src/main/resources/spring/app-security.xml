@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- Enable the method security to use the @PreAuthorize, @PreFilter, @PostAuthorize
+        and @PostFilter annotations in methods and secure it. -->
+    <global-method-security pre-post-annotations="enabled"/>
+
+    <http pattern="/resources/**" security="none"/>
+
+    <!-- Secure the application's URLs with the specific Role -->
+    <http use-expressions="true">
+        <intercept-url pattern="/login" access="isAnonymous()"/>
+        <intercept-url pattern="/signup" access="isAnonymous()"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+
+        <form-login login-page="/login"
+                    default-target-url="/home"
+                    authentication-failure-handler-ref="myAuthFailureHandler"
+        />
+        <logout logout-url="/logout"
+                logout-success-url="/login"
+                invalidate-session="true"
+                delete-cookies="JSESSIONID"/>
+
+        <!-- Access denied page -->
+        <access-denied-handler error-page="/error"/>
+
+        <!-- CSRF protection -->
+        <csrf/>
+
+        <!-- Remember-me authentication -->
+        <remember-me
+                token-validity-seconds="2592000"
+                remember-me-parameter="remember-me"
+                user-service-ref="myUserDetailsService"/>
+    </http>
+
+    <!-- Authentication failure handler -->
+    <beans:bean id="myAuthFailureHandler"
+                class="com.pablotr87.concessionaire.security.handler.MyAuthenticationFailureHandler"/>
+
+
+    <!-- Define the application authentication manager to use a custom Class
+        (mongoUserDetailsService) to validate the user access, and the password enconding -->
+    <authentication-manager alias="authenticationManager" erase-credentials="false">
+        <authentication-provider user-service-ref="myUserDetailsService">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="myUserDetailsService"
+                class="com.pablotr87.concessionaire.security.service.MyUserDetailsService"/>
+
+    <!-- Password encoding -->
+    <beans:bean id="passwordEncoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+</beans:beans>

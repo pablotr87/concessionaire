@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/data/mongo
+    http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+    <!-- Annotations activation -->
+    <mvc:annotation-driven validator="validator"/>
+
+    <!--Where to search Spring annotations -->
+    <context:component-scan base-package="com.pablotr87.concessionaire.controller"/>
+    <context:component-scan base-package="com.pablotr87.concessionaire.repository"/>
+    <context:component-scan base-package="com.pablotr87.concessionaire.security"/>
+
+    <!-- Static resources definition -->
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
+
+    <!-- Tiles config: resolve controller results into tiles defined views -->
+    <mvc:view-resolvers>
+        <mvc:content-negotiation use-not-acceptable="true"/>
+        <mvc:bean-name/>
+        <mvc:tiles/>
+    </mvc:view-resolvers>
+
+    <mvc:tiles-configurer>
+        <mvc:definitions location="classpath:tiles/base-tiles.xml"/>
+        <mvc:definitions location="classpath:tiles/backend-tiles.xml"/>
+        <mvc:definitions location="classpath:tiles/frontend-tiles.xml"/>
+    </mvc:tiles-configurer>
+
+    <!-- Message validation -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+
+    <!-- Multilanguage configuration -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages/app"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!-- Factory bean that creates the Mongo instance -->
+    <bean id="mongo" class="org.springframework.data.mongodb.core.MongoClientFactoryBean">
+        <property name="host" value="localhost"/>
+    </bean>
+
+    <!-- MongoTemplate for connecting and quering the documents in the database -->
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongo" ref="mongo"/>
+        <constructor-arg name="databaseName" value="concessionaire"/>
+    </bean>
+    <mongo:repositories base-package="com.pablotr87.concessionaire.repository"/>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/resources/**"/>
+            <mvc:exclude-mapping path="/general/**"/>
+            <bean class="com.pablotr87.concessionaire.interceptor.AccessControlInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
+

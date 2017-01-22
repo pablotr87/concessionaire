@@ -15,8 +15,9 @@
 
     <!-- Secure the application's URLs with the specific Role -->
     <http use-expressions="true">
-        <intercept-url pattern="/login" access="isAnonymous()"/>
-        <intercept-url pattern="/signup" access="isAnonymous()"/>
+
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/signup" access="permitAll"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
 
         <form-login login-page="/login"
@@ -29,7 +30,7 @@
                 delete-cookies="JSESSIONID"/>
 
         <!-- Access denied page -->
-        <access-denied-handler error-page="/error"/>
+        <access-denied-handler error-page="/accessDenied"/>
 
         <!-- CSRF protection -->
         <csrf/>

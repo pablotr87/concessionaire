@@ -23,7 +23,6 @@ public class CarServiceImpl implements CarService {
      *
      * @param carRepositoryDao
      */
-    @Autowired
     public CarServiceImpl(final CarRepositoryDao carRepositoryDao) {
         this.carRepositoryDao = carRepositoryDao;
     }

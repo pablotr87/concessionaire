@@ -1,6 +1,8 @@
 package com.pablotr87.concessionaire.util;
 
 /**
+ * Constants variables class.
+ *
  * @author pablotr87
  */
 public final class Constants {

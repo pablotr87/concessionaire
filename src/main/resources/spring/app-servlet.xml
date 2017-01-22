@@ -16,7 +16,7 @@
     <!-- Annotations activation -->
     <mvc:annotation-driven validator="validator"/>
 
-    <!--Where to search Spring annotations -->
+    <!-- Where to search Spring annotations -->
     <context:component-scan base-package="com.pablotr87.concessionaire.controller"/>
     <context:component-scan base-package="com.pablotr87.concessionaire.repository"/>
     <context:component-scan base-package="com.pablotr87.concessionaire.security"/>
@@ -24,13 +24,17 @@
     <!-- Static resources definition -->
     <mvc:resources location="/resources/" mapping="/resources/**"/>
 
-    <!-- Tiles config: resolve controller results into tiles defined views -->
+    <!-- Mapping path-views without controllers -->
+    <mvc:view-controller path="/accessDenied" view-name="accessDeniedView"/>
+
+    <!-- Tiles config: resolve controller results into tiles defined views. Returns 406 code if no view is found. -->
     <mvc:view-resolvers>
         <mvc:content-negotiation use-not-acceptable="true"/>
         <mvc:bean-name/>
         <mvc:tiles/>
     </mvc:view-resolvers>
 
+    <!-- Definition Tiles files location. -->
     <mvc:tiles-configurer>
         <mvc:definitions location="classpath:tiles/base-tiles.xml"/>
         <mvc:definitions location="classpath:tiles/backend-tiles.xml"/>
@@ -62,6 +66,10 @@
     </bean>
     <mongo:repositories base-package="com.pablotr87.concessionaire.repository"/>
 
+    <!-- Save locale into session -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+
+    <!-- Interceptors definition -->
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
         <mvc:interceptor>

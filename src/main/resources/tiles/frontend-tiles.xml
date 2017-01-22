@@ -21,7 +21,13 @@
         <put-attribute name="content" value="/WEB-INF/jsp/concessionaire/carsList.jsp"/>
 
         <put-list-attribute name="filesJS" inherit="true">
+            <add-attribute value="/resources/js/bootstrap/bootstrap-table.min.js" />
+            <add-attribute value="/resources/js/bootstrap/bootstrap-table-locale-all.min.js" />
             <add-attribute value="/resources/js/concessionaire/carsList.js"/>
+        </put-list-attribute>
+
+        <put-list-attribute name="filesCSS" inherit="true">
+            <add-attribute value="/resources/css/bootstrap/bootstrap-table.min.css" />
         </put-list-attribute>
     </definition>
 

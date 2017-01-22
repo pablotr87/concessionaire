@@ -7,36 +7,37 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <!-- MongoDB -->
-        <mongodb.version>3.3.0</mongodb.version>
+        <mongodb.version>3.4.1</mongodb.version>
 
         <!-- Spring -->
-        <spring.version>4.3.4.RELEASE</spring.version>
-        <spring.mongodb.version>1.9.5.RELEASE</spring.mongodb.version>
+        <spring.version>4.3.5.RELEASE</spring.version>
+        <spring.mongodb.version>1.9.6.RELEASE</spring.mongodb.version>
 
         <!-- Spring Security -->
-        <spring.security.version>4.2.0.RELEASE</spring.security.version>
+        <spring.security.version>4.2.1.RELEASE</spring.security.version>
 
         <!-- Logger -->
-        <slf4j.version>1.7.21</slf4j.version>
+        <slf4j.version>1.7.22</slf4j.version>
 
         <!-- Validation -->
         <javax.validation.version>1.1.0.Final</javax.validation.version>
-        <hibernate.validator.version>5.3.2.Final</hibernate.validator.version>
+        <hibernate.validator.version>5.3.4.Final</hibernate.validator.version>
 
         <!-- Web -->
         <jstl.version>1.2</jstl.version>
         <tiles.version>3.0.7</tiles.version>
         <servlet.version>3.1.0</servlet.version>
-        <jackson.version>2.8.5</jackson.version>
+        <jackson.version>2.8.6</jackson.version>
 
         <!-- Maven plugins -->
-        <maven.plugin.version>3.0.0</maven.plugin.version>
+        <maven.war.plugin.version>3.0.0</maven.war.plugin.version>
+        <maven.plugin.version>2.19.1</maven.plugin.version>
 
         <!-- Test -->
         <junit.version>4.12</junit.version>
 
         <!-- Sonar properties -->
-        <sonar.jacoco.version>0.7.7.201606060606</sonar.jacoco.version>
+        <sonar.jacoco.version>0.7.8</sonar.jacoco.version>
         <sonar.jacoco.itReportPath>${project.basedir}/target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.language>java</sonar.language>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -234,7 +235,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>${maven.plugin.version}</version>
+                <version>${maven.war.plugin.version}</version>
                 <configuration>
                     <webResources>
                         <resource>
@@ -243,10 +244,10 @@
                     </webResources>
                 </configuration>
             </plugin>
-            <!-- TEST PHASE -->
+            <!-- Test phase -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
+                <version>${maven.plugin.version}</version>
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
@@ -255,7 +256,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.16</version>
+                <version>${maven.plugin.version}</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
@@ -273,7 +274,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.1.201405082137</version>
+                <version>${sonar.jacoco.version}</version>
                 <executions>
                     <!-- We want to execute jacoco:prepare-agent-integration in test phase,
                     but before executing maven failsafe plugin -->
@@ -288,6 +289,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

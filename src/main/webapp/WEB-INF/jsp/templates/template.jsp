@@ -25,6 +25,8 @@
 		<c:forEach var="item" items="${filesJS}">
 			<script src="<spring:url value="${item}"/>"></script>
 		</c:forEach>
+
+		<c:set var="localeCode" value="${user.language}" scope="request" />
 		
 		<script>
 			// Load JS functions defined in tiles

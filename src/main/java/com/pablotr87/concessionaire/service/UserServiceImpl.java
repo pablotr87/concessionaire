@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
      *
      * @param userRepositoryDao
      */
-    @Autowired
     public UserServiceImpl(final UserRepositoryDao userRepositoryDao) {
         this.userRepositoryDao = userRepositoryDao;
     }

@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Bean that represents an application user.
+ *
  * @author pablotr87
  */
 @Document(collection = "users")
@@ -20,6 +21,8 @@ public class UserBean {
     private String password;
 
     private int role;
+
+    private String language;
 
     public UserBean() {
         setRole(Constants.ROLE_USER_ID);
@@ -63,5 +66,13 @@ public class UserBean {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

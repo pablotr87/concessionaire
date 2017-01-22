@@ -29,6 +29,6 @@
 	<!-- ************************************************** -->
 	<!-- ******************* ERRORS *********************** -->
 	<!-- ************************************************** -->
-	<definition name="accesDeniedView" template="/WEB-INF/jsp/general/403.jsp" />
+	<definition name="accessDeniedView" template="/WEB-INF/jsp/general/403.jsp" />
 
 </tiles-definitions>

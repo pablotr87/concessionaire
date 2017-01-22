@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="${pageContext.request.contextPath}/">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <spring:message code="general.home"/>
                         </a>

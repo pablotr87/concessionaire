@@ -24,6 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
     private UserRepositoryDao userRepositoryDao;
 
     /**
+     * Obtains a user from DB by its username.
      *
      * @param username
      * @return

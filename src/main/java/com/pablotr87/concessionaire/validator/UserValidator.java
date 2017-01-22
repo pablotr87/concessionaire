@@ -42,10 +42,10 @@ public class UserValidator implements Validator {
     private final UserService userService;
 
     /**
+     * Constructor.
      *
      * @param userService
      */
-    @Autowired
     public UserValidator(final UserService userService) {
         this.userService = userService;
     }

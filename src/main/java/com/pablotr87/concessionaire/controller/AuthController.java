@@ -45,7 +45,6 @@ public class AuthController {
     private static final String URL_ROOT = "/";
     private static final String URL_LOGIN = "/login";
     private static final String URL_SIGN_UP = "/signup";
-    private static final String URL_LOGOUT = "/logout";
 
     private static final String URL_HOME = "/home";
 
@@ -73,7 +72,6 @@ public class AuthController {
      * @param userValidator
      * @param passwordEncoder
      */
-    @Autowired
     public AuthController(final UserService userService,
                           final UserValidator userValidator,
                           final PasswordEncoder passwordEncoder) {

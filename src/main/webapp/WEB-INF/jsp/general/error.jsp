@@ -3,7 +3,7 @@
 
 <html class="error-page">
 <head>
-    <title><spring:message code="error.accessDenied"/></title>
+    <title><spring:message code="error.general.title"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -30,8 +30,8 @@
             <div class="centering text-center error-container">
                 <div class="text-center">
                     <h2 class="without-margin">
-                        <spring:message code="error.accessDenied.msg1"/> <span class="text-warning big">403</span> <spring:message code="error.accessDenied.msg2"/></h2>
-                    <h4 class="text-warning"><spring:message code="error.accessDenied"/></h4>
+                        <span class="text-warning big">Oops!</span></h2>
+                    <h4 class="text-warning"><spring:message code="error.general"/></h4>
                 </div>
                 <div class="text-center">
                     <h3>

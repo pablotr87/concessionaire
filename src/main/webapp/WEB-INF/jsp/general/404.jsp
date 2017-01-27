@@ -3,7 +3,7 @@
 
 <html class="error-page">
 <head>
-    <title>404 error page</title>
+    <title><spring:message code="error.pageNotFound"/></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
             <div class="centering text-center error-container">
                 <div class="text-center">
                     <h2 class="without-margin">
-                        <spring:message code="error.pageNotFound.msg1"/> <span class="text-warning big">404</span><spring:message code="error.pageNotFound.msg2"/>.</h2>
+                        <spring:message code="error.pageNotFound.msg1"/> <span class="text-warning big">404</span> <spring:message code="error.pageNotFound.msg2"/></h2>
                     <h4 class="text-warning"><spring:message code="error.pageNotFound"/></h4>
                 </div>
                 <div class="text-center">
@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="${pageContext.request.contextPath}/">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <spring:message code="general.home"/>
                         </a>

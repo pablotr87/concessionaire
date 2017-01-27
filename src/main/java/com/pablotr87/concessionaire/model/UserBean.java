@@ -4,13 +4,18 @@ import com.pablotr87.concessionaire.util.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 /**
  * Bean that represents an application user.
  *
  * @author pablotr87
  */
 @Document(collection = "users")
-public class UserBean {
+public class UserBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     private String id;
 

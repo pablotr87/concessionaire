@@ -29,6 +29,8 @@
 	<!-- ************************************************** -->
 	<!-- ******************* ERRORS *********************** -->
 	<!-- ************************************************** -->
+	<definition name="errorView" template="/WEB-INF/jsp/general/error.jsp" />
 	<definition name="accessDeniedView" template="/WEB-INF/jsp/general/403.jsp" />
+	<definition name="notFoundView" template="/WEB-INF/jsp/general/404.jsp" />
 
 </tiles-definitions>

@@ -22,9 +22,11 @@
     <!-- Bootstrap -->
     <link href="<spring:url value="/resources/css/bootstrap/bootstrap.min.css" />" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="<spring:url value="/resources/css/font-awesome/font-awesome.min.css" />" rel="stylesheet">
+    <link href="<spring:url value="/resources/css/font-awesome/font-awesome.min.css" />"
+          rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="<spring:url value="/resources/css/concessionaire/concessionaire.css" />" rel="stylesheet">
+    <link href="<spring:url value="/resources/css/concessionaire/concessionaire.css" />"
+          rel="stylesheet">
 
     <!---- END CSS ---->
 
@@ -45,7 +47,7 @@
 <div class="login_wrapper">
     <div class="login_form">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title text-center">
                         <h1>Concessionaire</h1>
@@ -64,8 +66,17 @@
                             <h2>${msgSignInTitle}</h2>
                         </div>
 
+                        <c:if test="${not empty msg}">
+                            <spring:message var="msgOk" code="${msg}"/>
+                            <p class="alert alert-success">
+                                <i class="fa fa-check" aria-hidden="true"></i> ${msgOk}
+                            </p>
+                        </c:if>
                         <c:if test="${not empty errorMsg}">
-                            <span class="text-danger"><spring:message code="${errorMsg}"/></span>
+                            <spring:message var="msgKo" code="${errorMsg}"/>
+                            <p class="alert alert-danger">
+                                <i class="fa fa-times" aria-hidden="true"></i> ${msgKo}
+                            </p>
                         </c:if>
 
                         <form:form id="loginForm" class="form-horizontal" modelAttribute="user"
@@ -90,7 +101,7 @@
                                 </div>
                             </div>
                             <div>
-                                <input type="checkbox" name="remember-me" />
+                                <input type="checkbox" name="remember-me"/>
                                 <span>${msgRememberMe}</span>
                             </div>
                             <div class="form-group text-center">

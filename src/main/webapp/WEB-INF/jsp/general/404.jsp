@@ -30,7 +30,8 @@
             <div class="centering text-center error-container">
                 <div class="text-center">
                     <h2 class="without-margin">
-                        <spring:message code="error.pageNotFound.msg1"/> <span class="text-warning big">404</span> <spring:message code="error.pageNotFound.msg2"/></h2>
+                        <spring:message code="error.pageNotFound.msg1"/> <span class="text-warning big">404</span>
+                        <spring:message code="error.pageNotFound.msg2"/></h2>
                     <h4 class="text-warning"><spring:message code="error.pageNotFound"/></h4>
                 </div>
                 <div class="text-center">

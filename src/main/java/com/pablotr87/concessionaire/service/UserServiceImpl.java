@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
      * Inserts a user bean into database.
      *
      * @param user User bean.
-     * @return
+     * @return Number of affected registers.
      */
     @Override
     public int insertUser(final UserBean user) {

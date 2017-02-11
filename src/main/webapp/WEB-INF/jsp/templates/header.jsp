@@ -1,8 +1,8 @@
-<%@ taglib prefix="form"    uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" 	uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<spring:message var="msgLogOut" code="auth.logOut" />
-<spring:url var="urlLogOut" value="/logout" />
+<spring:message var="msgLogOut" code="auth.logOut"/>
+<spring:url var="urlLogOut" value="/logout"/>
 
 <div class="navbar-header">
     <button class="navbar-toggle collapsed" type="button"
@@ -38,7 +38,7 @@
             <ul class="dropdown-menu pull-right">
                 <li>
                     <form:form action="${urlLogOut}" method="POST">
-                        <button type="submit" class="btn btn-danger col-md-12">
+                        <button type="submit" class="btn btn-danger col-md-12 col-sm-12 col-xs-12">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             <span>${msgLogOut}</span>
                         </button>

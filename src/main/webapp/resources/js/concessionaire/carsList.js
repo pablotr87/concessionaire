@@ -1,6 +1,6 @@
-(function() {
-	var table = $("#carsList");
-	registerTableEvents(table);
+(function () {
+    var table = $("#carsList");
+    registerTableEvents(table);
 });
 
 /**
@@ -8,7 +8,7 @@
  * @returns
  */
 function registerTableEvents(table) {
-	table.on("dbl-click-row.bs.table", function(e, row) {
-		window.location.href = "cars/detail/" + row.id;
-	});
+    table.on("dbl-click-row.bs.table", function (e, row) {
+        window.location.href = "cars/detail/" + row.id;
+    });
 }

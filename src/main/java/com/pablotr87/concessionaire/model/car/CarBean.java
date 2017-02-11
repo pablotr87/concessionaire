@@ -1,22 +1,36 @@
 package com.pablotr87.concessionaire.model.car;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
 
 /**
  * Bean that represents a car.
+ *
  * @author pablotr87
  */
 @Document(collection = "cars")
 public class CarBean {
+
+    /**
+     * Car identifier.
+     */
     @Id
     private String id;
 
-    @DBRef
-    private List<MakesBean> makes;
+    /**
+     * Make name.
+     */
+    private String make;
+
+    /**
+     * Model name.
+     */
+    private String model;
+
+    /**
+     * Model year.
+     */
+    private Integer year;
 
     public String getId() {
         return id;
@@ -26,11 +40,27 @@ public class CarBean {
         this.id = id;
     }
 
-    public List<MakesBean> getMakes() {
-        return makes;
+    public String getMake() {
+        return make;
     }
 
-    public void setMakes(List<MakesBean> makes) {
-        this.makes = makes;
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
+ * DAO repository for car management.
+ *
  * @author pablotr87
  */
 @Repository

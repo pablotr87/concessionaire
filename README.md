@@ -1,9 +1,9 @@
 # Concessionaire
 
 This is a demo web application built with these technologies:
-- Spring (Bean, Context, MVC, Test) v4.3.4
-- Spring Data MongoDB v1.9.5
-- Spring Security v4.2.0
+- Spring Framework v4.3+
+- Spring Data MongoDB v1.10
+- Spring Security v4.2+
 - Bootstrap v3.3.7
 - jQuery v3.1.1
 

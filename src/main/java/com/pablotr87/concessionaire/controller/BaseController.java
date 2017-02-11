@@ -9,26 +9,26 @@ import org.springframework.context.MessageSource;
  */
 public abstract class BaseController {
 
-  /**
-   * Interface for resolving messages.
-   */
-  private MessageSource messageSource;
+    /**
+     * Interface for resolving messages.
+     */
+    private MessageSource messageSource;
 
-  /**
-   * CoNstructor with params.
-   *
-   * @param messageSourceNew Interface for resolving messages.
-   */
-  public BaseController(final MessageSource messageSourceNew) {
-    this.messageSource = messageSourceNew;
-  }
+    /**
+     * CoNstructor with params.
+     *
+     * @param messageSourceNew Interface for resolving messages.
+     */
+    public BaseController(final MessageSource messageSourceNew) {
+        this.messageSource = messageSourceNew;
+    }
 
-  /**
-   * Obtains the interface for resolving messages.
-   *
-   * @return Interface for resolving messages.
-   */
-  public MessageSource getMessageSource() {
-    return messageSource;
-  }
+    /**
+     * Obtains the interface for resolving messages.
+     *
+     * @return Interface for resolving messages.
+     */
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
 }

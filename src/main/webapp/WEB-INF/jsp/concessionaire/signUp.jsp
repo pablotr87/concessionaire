@@ -42,7 +42,7 @@
 <div class="sign_up_wrapper">
     <div class="sign_up_form">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title text-center">
                         <h1>Concessionaire</h1>
@@ -58,7 +58,10 @@
                         <spring:message var="msgSignIn2" code="auth.signUp.alreadyHaveAccount.msg2"/>
 
                         <c:if test="${not empty errorMsg}">
-                            <span class="error"><spring:message code="${errorMsg}"/></span>
+                            <spring:message var="msgKo" code="${errorMsg}"/>
+                            <p class="alert alert-danger">
+                                <i class="fa fa-times" aria-hidden="true"></i> ${msgKo}
+                            </p>
                         </c:if>
 
                         <div class="text-center">
@@ -86,7 +89,7 @@
                                     <form:input path="username" class="form-control"
                                                 placeholder="${msgUsername}"/>
                                 </div>
-                                ${usernameError}
+                                    ${usernameError}
                             </div>
                             <div class="intro">
                                 <div class="input-group ${not empty emailError ? 'has-error': ''}">
@@ -95,7 +98,7 @@
                                             </span>
                                     <form:input path="email" class="form-control" placeholder="${msgEmail}"/>
                                 </div>
-                                ${emailError}
+                                    ${emailError}
                             </div>
                             <div class="intro">
                                 <div class="input-group ${not empty passwordError ? 'has-error': ''}">
@@ -105,7 +108,7 @@
                                     <form:password path="password" class="form-control"
                                                    placeholder="${msgPassword}"/>
                                 </div>
-                                ${passwordError}
+                                    ${passwordError}
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit"

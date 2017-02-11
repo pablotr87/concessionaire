@@ -25,8 +25,9 @@ public interface UserService {
 
     /**
      * Inserts a user bean into database.
+     *
      * @param user User bean.
-     * @return
+     * @return Number of affected registers.
      */
     int insertUser(UserBean user);
 }

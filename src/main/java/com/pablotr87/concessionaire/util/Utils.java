@@ -1,8 +1,6 @@
 package com.pablotr87.concessionaire.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pablotr87.concessionaire.controller.AuthController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,14 +56,14 @@ public final class Utils {
      * Converts a object to String in JSON format.
      *
      * @param response HTTP response object.
-     * @param bean Java object.
+     * @param bean     Java object.
      * @return JSON string.
      */
     public static void exportToJson(HttpServletResponse response, Object bean) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            String jsonString   = mapper.writeValueAsString(bean);
-            PrintWriter writer  = response.getWriter();
+            String jsonString = mapper.writeValueAsString(bean);
+            PrintWriter writer = response.getWriter();
             writer.write(jsonString);
             writer.flush();
         } catch (IOException e) {

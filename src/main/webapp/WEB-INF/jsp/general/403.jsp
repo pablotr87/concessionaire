@@ -30,7 +30,8 @@
             <div class="centering text-center error-container">
                 <div class="text-center">
                     <h2 class="without-margin">
-                        <spring:message code="error.accessDenied.msg1"/> <span class="text-warning big">403</span> <spring:message code="error.accessDenied.msg2"/></h2>
+                        <spring:message code="error.accessDenied.msg1"/> <span class="text-warning big">403</span>
+                        <spring:message code="error.accessDenied.msg2"/></h2>
                     <h4 class="text-warning"><spring:message code="error.accessDenied"/></h4>
                 </div>
                 <div class="text-center">

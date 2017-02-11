@@ -38,7 +38,7 @@
     </mvc:view-resolvers>
 
     <!-- Definition Tiles files location. -->
-    <mvc:tiles-configurer>
+    <mvc:tiles-configurer check-refresh="true" validate-definitions="true">
         <mvc:definitions location="classpath:tiles/base-tiles.xml"/>
         <mvc:definitions location="classpath:tiles/backend-tiles.xml"/>
         <mvc:definitions location="classpath:tiles/frontend-tiles.xml"/>
@@ -70,7 +70,9 @@
     <mongo:repositories base-package="com.pablotr87.concessionaire.repository"/>
 
     <!-- Save locale into session -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+    </bean>
 
     <!-- Interceptors definition -->
     <mvc:interceptors>

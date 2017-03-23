@@ -49,11 +49,11 @@
 
         <div id="wrapper">
             <!-- SIDE MENU -->
-            <div id="sidebar-wrapper" class="col-md-1 col-sm-1 col-xs-1">
+            <div id="sidebar-wrapper" class="col-md-2 col-sm-2 col-xs-2">
                 <tiles:insertAttribute name="sidebar"/>
             </div>
             <!-- CONTENT -->
-            <div id="main-wrapper" class="col-md-11 col-sm-11 col-xs-11">
+            <div id="main-wrapper" class="col-md-10 col-sm-10 col-xs-10">
                 <div id="main">
                     <tiles:insertAttribute name="content"/>
                 </div>

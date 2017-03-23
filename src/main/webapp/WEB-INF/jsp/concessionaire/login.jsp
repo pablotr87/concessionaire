@@ -25,7 +25,7 @@
     <link href="<spring:url value="/resources/css/font-awesome/font-awesome.min.css" />"
           rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="<spring:url value="/resources/css/concessionaire/concessionaire.css" />"
+    <link href="<spring:url value="/resources/css/concessionaire/base.css" />"
           rel="stylesheet">
 
     <!---- END CSS ---->

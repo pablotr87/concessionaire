@@ -1,0 +1,14 @@
+/*
+Main color:       #0B454E
+Secondary color:  #126A94
+ */
+
+/* Init administration */
+.initAdmin {
+    color: #126a94;
+    text-shadow: 1px 2px 2px rgba(0,0,0,.6);
+    text-align: center;
+    font-family: "Courgette", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 230px;
+}
+/* /Init administration */

@@ -20,15 +20,16 @@
     <mvc:annotation-driven validator="validator"/>
 
     <!-- Where to search Spring annotations -->
-    <context:component-scan base-package="com.pablotr87.concessionaire.controller"/>
-    <context:component-scan base-package="com.pablotr87.concessionaire.repository"/>
-    <context:component-scan base-package="com.pablotr87.concessionaire.security"/>
+    <context:component-scan base-package="com.ptirador.concessionaire.controller"/>
+    <context:component-scan base-package="com.ptirador.concessionaire.repository"/>
+    <context:component-scan base-package="com.ptirador.concessionaire.security"/>
 
     <!-- Static resources definition -->
     <mvc:resources location="/resources/" mapping="/resources/**"/>
 
     <!-- Mapping path-views without controllers -->
     <mvc:view-controller path="/accessDenied" view-name="accessDeniedView"/>
+    <mvc:view-controller path="/administration" view-name="initAdminView"/>
 
     <!-- Tiles config: resolve controller results into tiles defined views. Returns 406 code if no view is found. -->
     <mvc:view-resolvers>
@@ -40,9 +41,12 @@
     <!-- Definition Tiles files location. -->
     <mvc:tiles-configurer check-refresh="true" validate-definitions="true">
         <mvc:definitions location="classpath:tiles/base-tiles.xml"/>
-        <mvc:definitions location="classpath:tiles/backend-tiles.xml"/>
-        <mvc:definitions location="classpath:tiles/frontend-tiles.xml"/>
+        <mvc:definitions location="classpath:tiles/admin-tiles.xml"/>
+        <mvc:definitions location="classpath:tiles/general-tiles.xml"/>
     </mvc:tiles-configurer>
+
+    <!-- Spreadsheet view -->
+    <bean id="spreadsheetView" class="com.ptirador.concessionaire.views.ExportListSpreadsheetView"/>
 
     <!-- Message validation -->
     <bean id="validator"
@@ -67,7 +71,7 @@
         <constructor-arg name="mongo" ref="mongo"/>
         <constructor-arg name="databaseName" value="concessionaire"/>
     </bean>
-    <mongo:repositories base-package="com.pablotr87.concessionaire.repository"/>
+    <mongo:repositories base-package="com.ptirador.concessionaire.repository"/>
 
     <!-- Save locale into session -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
@@ -81,7 +85,13 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/resources/**"/>
             <mvc:exclude-mapping path="/general/**"/>
-            <bean class="com.pablotr87.concessionaire.interceptor.AccessControlInterceptor"/>
+            <bean class="com.ptirador.concessionaire.interceptor.AccessControlInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/resources/**"/>
+            <mvc:exclude-mapping path="/general/**"/>
+            <bean class="com.ptirador.concessionaire.interceptor.MenuInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

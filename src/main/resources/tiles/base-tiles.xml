@@ -16,12 +16,24 @@
         <put-list-attribute name="filesJS">
             <add-attribute value="/resources/js/jquery/jquery.min.js"/>
             <add-attribute value="/resources/js/bootstrap/bootstrap.min.js"/>
+            <add-attribute value="/resources/js/concessionaire/base.js"/>
         </put-list-attribute>
 
         <put-list-attribute name="filesCSS">
             <add-attribute value="/resources/css/bootstrap/bootstrap.min.css"/>
             <add-attribute value="/resources/css/font-awesome/font-awesome.min.css"/>
-            <add-attribute value="/resources/css/concessionaire/concessionaire.css"/>
+            <add-attribute value="/resources/css/fonts/courgette.css" />
+            <add-attribute value="/resources/css/concessionaire/base.css"/>
+        </put-list-attribute>
+
+    </definition>
+
+    <definition name="baseAdmin" extends="base">
+
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/indexAdmin.jsp" />
+
+        <put-list-attribute name="filesCSS" inherit="true">
+            <add-attribute value="/resources/css/concessionaire/admin/baseAdmin.css"/>
         </put-list-attribute>
 
     </definition>

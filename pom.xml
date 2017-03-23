@@ -1,7 +1,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.pablotr87</groupId>
+    <groupId>com.ptirador</groupId>
     <artifactId>concessionaire</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -30,6 +30,9 @@
         <jstl.version>1.2</jstl.version>
         <tiles.version>3.0.7</tiles.version>
         <servlet.version>3.1.0</servlet.version>
+
+        <!-- Excel POI -->
+        <poi.version>3.15</poi.version>
 
         <!-- JSON -->
         <jackson.version>2.8.6</jackson.version>
@@ -156,6 +159,19 @@
             <artifactId>tiles-template</artifactId>
             <version>${tiles.version}</version>
         </dependency>
+
+        <!-- Excel POI -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
 
         <!-- JSON -->
         <dependency>

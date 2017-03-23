@@ -1,11 +1,11 @@
-(function () {
-    var table = $("#carsList");
+$(function () {
+    var table = $("#carsListTb");
     registerTableEvents(table);
 });
 
 /**
- * @param table
- * @returns
+ * Register table events.
+ * @param table Table element.
  */
 function registerTableEvents(table) {
     table.on("dbl-click-row.bs.table", function (e, row) {

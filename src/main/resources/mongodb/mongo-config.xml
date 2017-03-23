@@ -18,7 +18,7 @@
 
     <!-- Base package to scan the mongo repositories, where we create DAOs
         to access data and domain objects -->
-    <mongo:repositories base-package="com.pablotr87.concessionaire.repository"/>
+    <mongo:repositories base-package="com.ptirador.concessionaire.repository" repository-impl-postfix="CustomImpl"/>
 
 
 </beans>

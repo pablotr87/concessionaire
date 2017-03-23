@@ -7,10 +7,10 @@
 <spring:message var="msgYear" code="car.year"/>
 
 <spring:message var="msgWait" code="general.wait"/>
-<spring:message var="msgExportToExcel" code="general.exportToExcel"/>
+<spring:message var="msgExportToSpreadSheet" code="general.exportToSpreadsheet"/>
 <spring:message var="exportButton" code="button.export"/>
 
-<spring:url var="urlCarsList" value="/cars"/>
+<spring:url var="urlCarsList" value="/cars/jsonList"/>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -20,7 +20,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <table id="carsList"
+                <table id="carsListTb"
                        class="table table-striped jambo_table"
                        data-toggle="table"
                        data-search="true"
@@ -42,8 +42,8 @@
                     </thead>
                 </table>
                 <div class="text-center">
-                    <button type="button" class="btn btn-success btn-excel" title="${msgExportToExcel}"
-                            onclick="exportToExcel('carsList', 'cars/exportToExcel')"
+                    <button type="button" class="btn btn-success btn-spreadsheet" title="${msgExportToSpreadSheet}"
+                            onclick="exportToSpreadsheet('carsListTb', 'cars/exportToSpreadsheet')"
                             data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> ${msgWait}">
                         <span>${exportButton}</span> <i class="fa fa-file-excel-o text-success" aria-hidden="true"></i>
                     </button>

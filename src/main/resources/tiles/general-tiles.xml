@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- ************************************************** -->
+    <!-- ******************* LOGIN ************************ -->
+    <!-- ************************************************** -->
+    <definition name="loginView" template="/WEB-INF/jsp/concessionaire/login.jsp"/>
+
+    <!-- ************************************************** -->
+    <!-- ****************** SIGN UP *********************** -->
+    <!-- ************************************************** -->
+    <definition name="signUpView" template="/WEB-INF/jsp/concessionaire/signUp.jsp"/>
+
+    <!-- ************************************************** -->
+    <!-- ******************* HOME ************************* -->
+    <!-- ************************************************** -->
+    <definition name="homeView" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/concessionaire/index.jsp"/>
+    </definition>
+
+    <!-- ************************************************** -->
+    <!-- ******************* CARS ************************* -->
+    <!-- ************************************************** -->
+    <definition name="carsListView" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/concessionaire/carsList.jsp"/>
+
+        <put-list-attribute name="filesJS" inherit="true">
+            <add-attribute value="/resources/js/bootstrap/bootstrap-table.min.js"/>
+            <add-attribute value="/resources/js/bootstrap/bootstrap-table-locale-all.min.js"/>
+            <add-attribute value="/resources/js/concessionaire/carsList.js"/>
+        </put-list-attribute>
+
+        <put-list-attribute name="filesCSS" inherit="true">
+            <add-attribute value="/resources/css/bootstrap/bootstrap-table.min.css"/>
+        </put-list-attribute>
+    </definition>
+
+</tiles-definitions>

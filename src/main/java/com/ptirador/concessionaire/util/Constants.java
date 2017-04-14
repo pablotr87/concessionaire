@@ -53,15 +53,11 @@ public final class Constants {
     /**
      * Administrator role name.
      */
-    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_ADMIN = "ADMIN";
     /**
      * User role name.
      */
-    public static final String ROLE_USER = "ROLE_USER";
-    /**
-     * Role checking to securize URLs.
-     */
-    public static final String IS_USER = "hasAnyRole('" + ROLE_ADMIN + "', '" + ROLE_USER + "')";
+    public static final String ROLE_USER = "USER";
     /**
      * Session attribute for a logged user.
      */

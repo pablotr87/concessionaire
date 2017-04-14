@@ -13,18 +13,18 @@
         <mongodb.version>3.4.2</mongodb.version>
 
         <!-- Spring -->
-        <spring.version>4.3.6.RELEASE</spring.version>
-        <spring.mongodb.version>1.10.0.RELEASE</spring.mongodb.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.mongodb.version>1.10.1.RELEASE</spring.mongodb.version>
 
         <!-- Spring Security -->
-        <spring.security.version>4.2.1.RELEASE</spring.security.version>
+        <spring.security.version>4.2.2.RELEASE</spring.security.version>
 
         <!-- Logging -->
         <slf4j.version>1.7.22</slf4j.version>
 
         <!-- Validation -->
         <javax.validation.version>1.1.0.Final</javax.validation.version>
-        <hibernate.validator.version>5.3.4.Final</hibernate.validator.version>
+        <hibernate.validator.version>5.4.1.Final</hibernate.validator.version>
 
         <!-- Web -->
         <jstl.version>1.2</jstl.version>
@@ -43,7 +43,7 @@
         <maven.plugin.version>2.19.1</maven.plugin.version>
 
         <!-- Sonar properties -->
-        <sonar.jacoco.version>0.7.8</sonar.jacoco.version>
+        <sonar.jacoco.version>0.7.9</sonar.jacoco.version>
         <sonar.jacoco.itReportPath>${project.basedir}/target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.language>java</sonar.language>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>

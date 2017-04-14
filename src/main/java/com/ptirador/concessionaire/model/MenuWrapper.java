@@ -24,7 +24,7 @@ public class MenuWrapper implements Serializable {
     /**
      * Menus list.
      */
-    private transient List<MenuBean> menusList;
+    private transient List<Menu> menusList;
 
     /**
      * Constructor.
@@ -32,7 +32,7 @@ public class MenuWrapper implements Serializable {
      * @param typeId
      * @param menusList
      */
-    public MenuWrapper(Integer typeId, List<MenuBean> menusList) {
+    public MenuWrapper(Integer typeId, List<Menu> menusList) {
         this.typeId = typeId;
         this.menusList = menusList;
     }
@@ -45,11 +45,11 @@ public class MenuWrapper implements Serializable {
         this.typeId = typeId;
     }
 
-    public List<MenuBean> getMenusList() {
+    public List<Menu> getMenusList() {
         return menusList;
     }
 
-    public void setMenusList(List<MenuBean> menusList) {
+    public void setMenusList(List<Menu> menusList) {
         this.menusList = menusList;
     }
 }

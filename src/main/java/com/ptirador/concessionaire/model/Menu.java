@@ -14,7 +14,7 @@ import java.util.List;
  * @author ptirador
  */
 @Document(collection = "menus")
-public class MenuBean implements Serializable {
+public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,7 +65,7 @@ public class MenuBean implements Serializable {
      * Menu children.
      */
     @DBRef
-    private transient List<MenuBean> children;
+    private transient List<Menu> children;
 
 
     public String getId() {
@@ -132,11 +132,11 @@ public class MenuBean implements Serializable {
         this.typeId = typeId;
     }
 
-    public List<MenuBean> getChildren() {
+    public List<Menu> getChildren() {
         return children;
     }
 
-    public void setChildren(List<MenuBean> children) {
+    public void setChildren(List<Menu> children) {
         this.children = children;
     }
 }

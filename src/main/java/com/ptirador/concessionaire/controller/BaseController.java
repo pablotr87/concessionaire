@@ -11,6 +11,7 @@ import java.util.Locale;
 /**
  * Abstract class that contains common variables and methods.
  *
+ * @param <T>
  * @author ptirador
  */
 public abstract class BaseController<T> {

@@ -1,12 +1,12 @@
 package com.ptirador.concessionaire.controller;
 
-import com.ptirador.concessionaire.model.UserBean;
+import com.ptirador.concessionaire.model.User;
 import com.ptirador.concessionaire.service.UserService;
 import com.ptirador.concessionaire.util.Constants;
 import com.ptirador.concessionaire.validator.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,14 +68,18 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     /**
-     * Autowired constructor.
+     * Constructor.
+     *
+     * @param userService
+     * @param userValidator
+     * @param passwordEncoder
      */
-    public AuthController(final UserService userServiceNew,
-                          final UserValidator userValidatorNew,
-                          final PasswordEncoder passwordEncoderNew) {
-        this.userService = userServiceNew;
-        this.userValidator = userValidatorNew;
-        this.passwordEncoder = passwordEncoderNew;
+    public AuthController(@Qualifier("userServiceImpl") final UserService userService,
+                          final UserValidator userValidator,
+                          final PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.userValidator = userValidator;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -91,19 +95,19 @@ public class AuthController {
     /**
      * Mapping for returning login page.
      *
-     * @param errorCode Error code for login.
-     * @param model     Model object.
+     * @param error Error code for login.
+     * @param model Model object.
      * @return Login page.
      */
     @GetMapping(URL_LOGIN)
-    public String getLogin(@RequestParam(value = "error", required = false) final String errorCode,
+    public String getLogin(@RequestParam(required = false) final String error,
                            final Model model) {
         String page = VIEW_LOGIN;
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth instanceof AnonymousAuthenticationToken) {
-            model.addAttribute(MDL_USER, new UserBean());
-            checkErrorCode(errorCode, model);
+            model.addAttribute(MDL_USER, new User());
+            checkErrorCode(error, model);
         } else {
             page = Constants.REDIRECT + URL_HOME;
         }
@@ -127,7 +131,7 @@ public class AuthController {
                     model.addAttribute(Constants.MSG_ERROR, MSG_CREDENTIALS_EXPIRED);
                     break;
                 default:
-                    LOG.error("Invalid error code: " + errorCode);
+                    LOG.error("Invalid error code: {}", errorCode);
             }
         }
     }
@@ -144,7 +148,7 @@ public class AuthController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth instanceof AnonymousAuthenticationToken) {
-            model.addAttribute(MDL_USER, new UserBean());
+            model.addAttribute(MDL_USER, new User());
         } else {
             page = Constants.REDIRECT + URL_HOME;
         }
@@ -162,7 +166,7 @@ public class AuthController {
      * @return Depending on the result, sign up view or redirect to login page.
      */
     @PostMapping(URL_SIGN_UP)
-    public String postSignUp(@ModelAttribute(MDL_USER) final UserBean user,
+    public String postSignUp(@ModelAttribute(MDL_USER) final User user,
                              final Errors errors,
                              final Model model,
                              final RedirectAttributes rda) {
@@ -171,7 +175,7 @@ public class AuthController {
         userValidator.validate(user, errors);
 
         if (errors.hasErrors()) {
-            LOG.error("Error while registering a user: " + user);
+            LOG.error("Error while registering a user: {}", user);
         } else {
             // Password encryption
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -192,7 +196,6 @@ public class AuthController {
      *
      * @return Cars list page.
      */
-    @PreAuthorize(Constants.IS_USER)
     @GetMapping(URL_HOME)
     public String getHomePage() {
         return VIEW_HOME;

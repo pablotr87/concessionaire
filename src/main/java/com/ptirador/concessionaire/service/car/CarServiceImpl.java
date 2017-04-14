@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.service.car;
 
-import com.ptirador.concessionaire.model.car.CarBean;
+import com.ptirador.concessionaire.model.car.Car;
 import com.ptirador.concessionaire.repository.car.CarRepositoryDao;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class CarServiceImpl implements CarService {
      * @return List of all available cars.
      */
     @Override
-    public Iterable<CarBean> getAllCars() {
+    public Iterable<Car> getAllCars() {
         return carRepositoryDao.findAll();
     }
 }

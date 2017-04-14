@@ -1,19 +1,15 @@
 package com.ptirador.concessionaire.controller;
 
-import com.ptirador.concessionaire.model.car.CarBean;
+import com.ptirador.concessionaire.model.car.Car;
 import com.ptirador.concessionaire.service.car.CarService;
-import com.ptirador.concessionaire.util.Constants;
 import com.ptirador.concessionaire.util.Utils;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.context.MessageSource;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -25,7 +21,7 @@ import java.util.Locale;
  */
 @Controller
 @RequestMapping("/cars")
-public class CarController extends BaseController<CarBean> {
+public class CarController extends BaseController<Car> {
 
     /**
      * Cars list view name.
@@ -37,6 +33,14 @@ public class CarController extends BaseController<CarBean> {
      */
     private static final String EXPORT_FILE_NAME = "carsList";
     /**
+     * Cars list URL.
+     */
+    private static final String URL_CARS_LIST = "/list";
+    /**
+     * Cars JSON list URL.
+     */
+    private static final String URL_CARS_JSON_LIST = "/jsonList";
+    /**
      * Interface service for car management.
      */
     private final CarService carService;
@@ -45,6 +49,7 @@ public class CarController extends BaseController<CarBean> {
      * Constructor.
      *
      * @param carService Interface service for car management.
+     * @param messageSource
      */
     public CarController(final CarService carService,
                          final MessageSource messageSource) {
@@ -57,8 +62,7 @@ public class CarController extends BaseController<CarBean> {
      *
      * @return Cars list view.
      */
-    @PreAuthorize(Constants.IS_USER)
-    @GetMapping("/list")
+    @GetMapping(URL_CARS_LIST)
     public String getCars() {
         return VIEW_CARS;
     }
@@ -68,11 +72,10 @@ public class CarController extends BaseController<CarBean> {
      *
      * @param response HTTP response.
      */
-    @PreAuthorize(Constants.IS_USER)
-    @GetMapping("/jsonList")
+    @GetMapping(URL_CARS_JSON_LIST)
     @ResponseBody
     public void getCarsList(HttpServletResponse response) {
-        Iterable<CarBean> carsList = carService.getAllCars();
+        Iterable<Car> carsList = carService.getAllCars();
         Utils.exportToJson(response, carsList);
     }
 
@@ -81,16 +84,16 @@ public class CarController extends BaseController<CarBean> {
      *
      * @param order
      * @param sort
-     * @param search
+     * @param search Text to query in JSON format.
      * @param filter
-     * @param locale
+     * @param locale Object that represents country/language.
      * @return
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<CarBean> getListToExport(String order, String sort, String search, String filter, Locale locale) {
-        Iterable<CarBean> iterable = carService.getAllCars();
-        List<CarBean> target = new ArrayList<>();
+    public List<Car> getListToExport(String order, String sort, String search, String filter, Locale locale) {
+        Iterable<Car> iterable = carService.getAllCars();
+        List<Car> target = new ArrayList<>();
         iterable.forEach(target::add);
         return target;
     }

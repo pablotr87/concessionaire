@@ -37,7 +37,7 @@ public class ExceptionHandlerAdvice {
 
     /**
      * @param e Exception object.
-     * @return
+     * @return Generic error view name.
      */
     @ExceptionHandler({Exception.class, RuntimeException.class})
     public String handleGenericException(final Exception e) {
@@ -47,7 +47,7 @@ public class ExceptionHandlerAdvice {
 
     /**
      * @param e Access denied exception object.
-     * @return
+     * @return Acess denied error view name.
      */
     @ExceptionHandler(AccessDeniedException.class)
     public String handleAccessDeniedException(final AccessDeniedException e) {
@@ -57,7 +57,7 @@ public class ExceptionHandlerAdvice {
 
     /**
      * @param e Handler not found exception object.
-     * @return
+     * @return No handler found view name.
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleNotFoundException(final NoHandlerFoundException e) {

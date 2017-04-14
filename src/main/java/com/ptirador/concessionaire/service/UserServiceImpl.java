@@ -1,7 +1,7 @@
 package com.ptirador.concessionaire.service;
 
-import com.ptirador.concessionaire.model.UserBean;
-import com.ptirador.concessionaire.repository.UserRepositoryDao;
+import com.ptirador.concessionaire.model.User;
+import com.ptirador.concessionaire.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,15 +13,15 @@ public class UserServiceImpl implements UserService {
     /**
      * Autowired fields.
      */
-    private UserRepositoryDao userRepositoryDao;
+    private UserRepository userRepository;
 
     /**
      * Constructor.
      *
-     * @param userRepositoryDao
+     * @param userRepository
      */
-    public UserServiceImpl(final UserRepositoryDao userRepositoryDao) {
-        this.userRepositoryDao = userRepositoryDao;
+    public UserServiceImpl(final UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     /**
@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
      * @return User bean object that matches the username. Null otherwise.
      */
     @Override
-    public UserBean findByUsername(final String username) {
-        return userRepositoryDao.findByUsername(username);
+    public User findByUsername(final String username) {
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
      * @return User bean object that matches the id. Null otherwise.
      */
     @Override
-    public UserBean findById(final String id) {
-        return userRepositoryDao.findOne(id);
+    public User findById(final String id) {
+        return userRepository.findOne(id);
     }
 
     /**
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
      * @return Number of affected registers.
      */
     @Override
-    public int insertUser(final UserBean user) {
-        return null != userRepositoryDao.save(user) ? 1 : 0;
+    public int insertUser(final User user) {
+        return null != userRepository.save(user) ? 1 : 0;
     }
 }

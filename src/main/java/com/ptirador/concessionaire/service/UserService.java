@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.service;
 
-import com.ptirador.concessionaire.model.UserBean;
+import com.ptirador.concessionaire.model.User;
 
 /**
  * @author ptirador
@@ -13,7 +13,7 @@ public interface UserService {
      * @param username Username.
      * @return User bean object that matches the username. Null otherwise.
      */
-    UserBean findByUsername(String username);
+    User findByUsername(String username);
 
     /**
      * Finds a user bean by its id.
@@ -21,7 +21,7 @@ public interface UserService {
      * @param id Id.
      * @return User bean object that matches the id. Null otherwise.
      */
-    UserBean findById(String id);
+    User findById(String id);
 
     /**
      * Inserts a user bean into database.
@@ -29,5 +29,5 @@ public interface UserService {
      * @param user User bean.
      * @return Number of affected registers.
      */
-    int insertUser(UserBean user);
+    int insertUser(User user);
 }

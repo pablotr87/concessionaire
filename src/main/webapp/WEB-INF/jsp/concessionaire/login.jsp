@@ -38,9 +38,6 @@
     <!-- Bootstrap -->
     <script src="<spring:url value="/resources/js/bootstrap/bootstrap.min.js" />"></script>
 
-    <!-- Custom JS -->
-    <script src="<spring:url value="/resources/js/concessionaire/login.js" />"></script>
-
     <!---- END JavaScript ---->
 </head>
 <body>

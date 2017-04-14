@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.validator;
 
-import com.ptirador.concessionaire.model.UserBean;
+import com.ptirador.concessionaire.model.User;
 import com.ptirador.concessionaire.service.UserService;
 import com.ptirador.concessionaire.util.Constants;
 import org.springframework.stereotype.Component;
@@ -51,12 +51,12 @@ public class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return UserBean.class.equals(clazz);
+        return User.class.equals(clazz);
     }
 
     @Override
     public void validate(Object obj, Errors errors) {
-        UserBean user = (UserBean) obj;
+        User user = (User) obj;
 
         // Checking empty fields.
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, USERNAME_FIELD,
@@ -67,7 +67,7 @@ public class UserValidator implements Validator {
                 MSG_MANDATORY_FIELD);
 
         // Check if username already exists.
-        UserBean dbUser = userService.findByUsername(user.getUsername());
+        User dbUser = userService.findByUsername(user.getUsername());
         if (null != dbUser) {
             errors.rejectValue(USERNAME_FIELD, MSG_USERNAME_EXISTS);
         }

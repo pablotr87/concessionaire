@@ -1,9 +1,10 @@
 package com.ptirador.concessionaire.interceptor;
 
 import com.ptirador.concessionaire.model.MenuWrapper;
-import com.ptirador.concessionaire.model.UserBean;
+import com.ptirador.concessionaire.model.User;
 import com.ptirador.concessionaire.service.MenuService;
 import com.ptirador.concessionaire.util.Constants;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -41,7 +42,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
      *
      * @param menuService Service for menu management.
      */
-    public MenuInterceptor(final MenuService menuService) {
+    public MenuInterceptor(@Qualifier("menuServiceImpl") final MenuService menuService) {
         this.menuService = menuService;
     }
 
@@ -60,7 +61,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession session = request.getSession();
         if (null != session) {
-            UserBean sessionUser = (UserBean) session.getAttribute(Constants.USER_LOGIN);
+            User sessionUser = (User) session.getAttribute(Constants.USER_LOGIN);
             if (null != sessionUser) {
                 @SuppressWarnings("unchecked")
                 List<MenuWrapper> menusList = (List<MenuWrapper>) session.getAttribute(S_MENUS_LIST);

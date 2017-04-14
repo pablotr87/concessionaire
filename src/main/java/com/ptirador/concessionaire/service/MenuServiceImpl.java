@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.service;
 
-import com.ptirador.concessionaire.model.MenuBean;
+import com.ptirador.concessionaire.model.Menu;
 import com.ptirador.concessionaire.model.MenuWrapper;
 import com.ptirador.concessionaire.repository.MenuRepository;
 import com.ptirador.concessionaire.util.Constants;
@@ -57,9 +57,9 @@ public class MenuServiceImpl implements MenuService {
      */
     private MenuWrapper getMenu(Integer typeId, Integer roleId) {
         String parentId = "0";
-        List<MenuBean> menus = menuRepository.getMenusByParent(typeId, roleId, parentId);
+        List<Menu> menus = menuRepository.getMenusByParent(typeId, roleId, parentId);
 
-        for (MenuBean menu : menus) {
+        for (Menu menu : menus) {
             manageChildren(menu, typeId, roleId);
         }
 
@@ -71,10 +71,10 @@ public class MenuServiceImpl implements MenuService {
      * @param typeId
      * @param roleId
      */
-    private void manageChildren(MenuBean menu, Integer typeId, Integer roleId) {
-        List<MenuBean> children = menuRepository.getMenusByParent(typeId, roleId, menu.getId());
+    private void manageChildren(Menu menu, Integer typeId, Integer roleId) {
+        List<Menu> children = menuRepository.getMenusByParent(typeId, roleId, menu.getId());
 
-        for (MenuBean child : children) {
+        for (Menu child : children) {
             manageChildren(child, typeId, roleId);
         }
 

@@ -103,7 +103,7 @@ public class ExportListSpreadsheetView extends AbstractXlsxView {
         header.setHeight((short) 500);
 
         CellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.DARK_BLUE.getIndex());
+        style.setFillForegroundColor(IndexedColors.DARK_TEAL.getIndex());
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
 

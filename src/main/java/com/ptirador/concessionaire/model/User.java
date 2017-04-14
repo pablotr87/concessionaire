@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author ptirador
  */
 @Document(collection = "users")
-public class UserBean implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class UserBean implements Serializable {
 
     private String language;
 
-    public UserBean() {
+    public User() {
         setRole(Constants.ROLE_USER_ID);
     }
 

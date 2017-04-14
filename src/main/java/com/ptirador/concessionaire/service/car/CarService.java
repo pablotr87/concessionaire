@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.service.car;
 
-import com.ptirador.concessionaire.model.car.CarBean;
+import com.ptirador.concessionaire.model.car.Car;
 
 /**
  * Interface service for car management.
@@ -14,5 +14,5 @@ public interface CarService {
      *
      * @return List of all available cars.
      */
-    Iterable<CarBean> getAllCars();
+    Iterable<Car> getAllCars();
 }

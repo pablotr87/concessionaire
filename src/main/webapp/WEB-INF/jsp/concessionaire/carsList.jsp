@@ -11,6 +11,7 @@
 <spring:message var="exportButton" code="button.export"/>
 
 <spring:url var="urlCarsList" value="/cars/jsonList"/>
+<spring:url var="urlExport" value="/cars/exportToSpreadsheet"/>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -43,7 +44,7 @@
                 </table>
                 <div class="text-center">
                     <button type="button" class="btn btn-success btn-spreadsheet" title="${msgExportToSpreadSheet}"
-                            onclick="exportToSpreadsheet('carsListTb', 'cars/exportToSpreadsheet')"
+                            onclick="exportToSpreadsheet('carsListTb', '${urlExport}')"
                             data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> ${msgWait}">
                         <span>${exportButton}</span> <i class="fa fa-file-excel-o text-success" aria-hidden="true"></i>
                     </button>

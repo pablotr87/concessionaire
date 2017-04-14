@@ -56,8 +56,7 @@ public final class Utils {
      * Converts a object to String in JSON format.
      *
      * @param response HTTP response object.
-     * @param bean     Java object.
-     * @return JSON string.
+     * @param bean     Java object to convert.
      */
     public static void exportToJson(HttpServletResponse response, Object bean) {
         try {
@@ -67,7 +66,7 @@ public final class Utils {
             writer.write(jsonString);
             writer.flush();
         } catch (IOException e) {
-            LOG.error("Conversion error to JSON: ", e);
+            LOG.error("Conversion error to JSON", e);
         }
     }
 }

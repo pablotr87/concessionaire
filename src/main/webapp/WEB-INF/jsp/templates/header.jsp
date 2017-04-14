@@ -11,8 +11,8 @@
 <spring:url var="urlAdmin" value="/administration"/>
 <spring:url var="urlExitAdmin" value="/"/>
 
-<sec:authorize var="isAdmin" access="hasAuthority('ROLE_ADMIN')" />
-<sec:authorize var="isUser" access="hasAuthority('ROLE_USER')" />
+<sec:authorize var="isAdmin" access="hasAuthority('ADMIN')" />
+<sec:authorize var="isUser" access="hasAuthority('USER')" />
 
 <div class="navbar-header">
     <a class="navbar-brand" href="#">

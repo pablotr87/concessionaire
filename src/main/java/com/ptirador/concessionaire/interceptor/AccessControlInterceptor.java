@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.interceptor;
 
-import com.ptirador.concessionaire.model.UserBean;
+import com.ptirador.concessionaire.model.User;
 import com.ptirador.concessionaire.service.UserService;
 import com.ptirador.concessionaire.util.Constants;
 
@@ -23,9 +23,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class AccessControlInterceptor extends HandlerInterceptorAdapter {
 
     /**
-     * Autowired fields.
+     * Service that manages users.
      */
     private UserService userService;
+
+    /**
+     * Locale resolver.
+     */
     private LocaleResolver localeResolver;
 
     /**
@@ -35,6 +39,9 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Constructor.
+     *
+     * @param userService    Service that manages users.
+     * @param localeResolver Locale resolver.
      */
     public AccessControlInterceptor(final UserService userService,
                                     final LocaleResolver localeResolver) {
@@ -48,7 +55,9 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
      * @param handler  Handler object.
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+    public boolean preHandle(final HttpServletRequest request,
+                             final HttpServletResponse response,
+                             final Object handler)
             throws ServletException, IOException {
 
         validateUserAccess(request, response);
@@ -62,10 +71,10 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
      * @param request  HTTP request.
      * @param response HTTP response.
      */
-    private void validateUserAccess(HttpServletRequest request,
-                                    HttpServletResponse response) {
+    private void validateUserAccess(final HttpServletRequest request,
+                                    final HttpServletResponse response) {
         HttpSession session = request.getSession();
-        UserBean sessionUser = (UserBean) session.getAttribute(Constants.USER_LOGIN);
+        User sessionUser = (User) session.getAttribute(Constants.USER_LOGIN);
 
         // If user access for first time...
         if (StringUtils.isEmpty(sessionUser)) {
@@ -73,7 +82,7 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (null != auth) {
                 String username = auth.getName();
-                UserBean dbUser = userService.findByUsername(username);
+                User dbUser = userService.findByUsername(username);
                 this.setUserExists(null != dbUser);
                 if (isUserExists()) {
 
@@ -99,6 +108,8 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Obtains the userExists member.
+     *
+     * @return true if user exists, false otherwise.
      */
     public boolean isUserExists() {
         return userExists;
@@ -106,6 +117,8 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Establishes the userExists member.
+     *
+     * @param userExists true if user exists, false otherwise.
      */
     public void setUserExists(boolean userExists) {
         this.userExists = userExists;

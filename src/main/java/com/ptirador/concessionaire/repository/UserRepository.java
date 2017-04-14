@@ -1,6 +1,6 @@
 package com.ptirador.concessionaire.repository;
 
-import com.ptirador.concessionaire.model.UserBean;
+import com.ptirador.concessionaire.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @author ptirador
  */
 @Repository
-public interface UserRepositoryDao extends CrudRepository<UserBean, String> {
+public interface UserRepository extends CrudRepository<User, String> {
 
     /**
      * Finds a user bean by its username.
@@ -16,5 +16,5 @@ public interface UserRepositoryDao extends CrudRepository<UserBean, String> {
      * @param username Username.
      * @return User bean object that matches the username. Null otherwise.
      */
-    UserBean findByUsername(String username);
+    User findByUsername(String username);
 }

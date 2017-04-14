@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author ptirador
  */
 @Document(collection = "cars")
-public class CarBean {
+public class Car {
 
     /**
      * Car identifier.

@@ -18,6 +18,11 @@ import java.util.List;
 public class MongoConfig extends AbstractMongoConfiguration {
 
     /**
+     * Database IP.
+     */
+    private static final String DB_IP = "127.0.0.1";
+
+    /**
      * Default port number.
      */
     private static final int PORT_NUMBER = 27017;
@@ -29,7 +34,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
     @Override
     public Mongo mongo() throws Exception {
-        return new MongoClient(System.getProperty("app.db.ip"), PORT_NUMBER);
+        return new MongoClient(DB_IP, PORT_NUMBER);
     }
 
     @Override

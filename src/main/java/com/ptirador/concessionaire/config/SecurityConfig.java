@@ -78,7 +78,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .rememberMe()
                     .tokenValiditySeconds(2592000)
-                    .rememberMeParameter("remember-me")
                 .userDetailsService(userDetailsServiceBean())
                     .and()
                 .httpBasic();

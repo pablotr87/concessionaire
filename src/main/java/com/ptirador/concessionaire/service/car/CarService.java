@@ -15,4 +15,12 @@ public interface CarService {
      * @return List of all available cars.
      */
     Iterable<Car> getAllCars();
+
+    /**
+     * Obtain a car by id.
+     *
+     * @param id Car identificator.
+     * @return Car with the corresponding id.
+     */
+    Car findById(String id);
 }

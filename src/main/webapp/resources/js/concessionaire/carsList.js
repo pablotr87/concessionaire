@@ -9,6 +9,6 @@ $(function () {
  */
 function registerTableEvents(table) {
     table.on("dbl-click-row.bs.table", function (e, row) {
-        window.location.href = "cars/detail/" + row.id;
+        window.location.href = "detail/" + row.id;
     });
 }

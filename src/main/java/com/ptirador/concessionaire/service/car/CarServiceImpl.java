@@ -26,13 +26,13 @@ public class CarServiceImpl implements CarService {
         this.carRepositoryDao = carRepositoryDao;
     }
 
-    /**
-     * Obtains a full list of cars.
-     *
-     * @return List of all available cars.
-     */
     @Override
     public Iterable<Car> getAllCars() {
         return carRepositoryDao.findAll();
+    }
+
+    @Override
+    public Car findById(String id) {
+        return carRepositoryDao.findOne(id);
     }
 }

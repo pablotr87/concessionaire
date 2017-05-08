@@ -38,4 +38,8 @@
         </put-list-attribute>
     </definition>
 
+    <definition name="carDetailView" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/concessionaire/carDetail.jsp"/>
+    </definition>
+
 </tiles-definitions>

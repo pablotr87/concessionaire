@@ -3,13 +3,17 @@ package com.ptirador.concessionaire.controller;
 import com.ptirador.concessionaire.model.car.Car;
 import com.ptirador.concessionaire.service.car.CarService;
 import com.ptirador.concessionaire.util.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -24,9 +28,18 @@ import java.util.Locale;
 public class CarController extends BaseController<Car> {
 
     /**
+     * Logger.
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(CarController.class);
+    /**
      * Cars list view name.
      */
     private static final String VIEW_CARS = "carsListView";
+
+    /**
+     * Car detail view.
+     */
+    private static final String VIEW_CAR_DETAIL = "carDetailView";
 
     /**
      * Export file name.
@@ -41,6 +54,18 @@ public class CarController extends BaseController<Car> {
      */
     private static final String URL_CARS_JSON_LIST = "/jsonList";
     /**
+     * Cars detail URL.
+     */
+    private static final String URL_CARS_DETAIL = "/detail/{id}";
+    /**
+     * URL that saves a car.
+     */
+    private static final String URL_SAVE_CAR = "/saveCar";
+    /**
+     * Model attribute for a car detail.
+     */
+    private static final String MDL_CAR = "car";
+    /**
      * Interface service for car management.
      */
     private final CarService carService;
@@ -48,7 +73,7 @@ public class CarController extends BaseController<Car> {
     /**
      * Constructor.
      *
-     * @param carService Interface service for car management.
+     * @param carService    Interface service for car management.
      * @param messageSource
      */
     public CarController(final CarService carService,
@@ -77,6 +102,45 @@ public class CarController extends BaseController<Car> {
     public void getCarsList(HttpServletResponse response) {
         Iterable<Car> carsList = carService.getAllCars();
         Utils.exportToJson(response, carsList);
+    }
+
+    /**
+     * Car detail.
+     *
+     */
+    @GetMapping(URL_CARS_DETAIL)
+    public String getCarDetail(@PathVariable String id,
+                               Model model) {
+        model.addAttribute(MDL_CAR, carService.findById(id));
+        return VIEW_CAR_DETAIL;
+    }
+
+    /**
+     * Saves an existing car.
+     *
+     * @param car
+     * @param errors
+     * @param model
+     * @param rda
+     * @param locale
+     * @return
+     */
+    @PostMapping(URL_SAVE_CAR)
+    public String saveCar( @ModelAttribute(MDL_CAR) @Valid Car car,
+                           Errors errors,
+                           Model model,
+                           RedirectAttributes rda,
+                           Locale locale) {
+
+        String pageResultado = VIEW_CAR_DETAIL;
+
+        if (errors.hasErrors()) {
+            LOG.error("Error while saving a car");
+        } else {
+
+        }
+
+        return VIEW_CAR_DETAIL;
     }
 
     /**

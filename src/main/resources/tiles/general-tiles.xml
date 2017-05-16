@@ -29,7 +29,8 @@
 
         <put-list-attribute name="filesJS" inherit="true">
             <add-attribute value="/resources/js/bootstrap/bootstrap-table.min.js"/>
-            <add-attribute value="/resources/js/bootstrap/bootstrap-table-locale-all.min.js"/>
+            <add-attribute value="/resources/js/bootstrap/bootstrap-table-en-US.min.js"/>
+            <add-attribute value="/resources/js/bootstrap/bootstrap-table-es-ES.min.js"/>
             <add-attribute value="/resources/js/concessionaire/carsList.js"/>
         </put-list-attribute>
 

@@ -2,7 +2,10 @@ package com.ptirador.concessionaire.service.car;
 
 import com.ptirador.concessionaire.model.car.Car;
 import com.ptirador.concessionaire.repository.car.CarRepositoryDao;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Implementation service for car management.
@@ -27,12 +30,18 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Iterable<Car> getAllCars() {
-        return carRepositoryDao.findAll();
+    public List<Car> getAllCars() {
+        Sort sortByMakeAndModel = new Sort(Sort.Direction.ASC, "make", "model", "year");
+        return carRepositoryDao.findAll(sortByMakeAndModel);
     }
 
     @Override
     public Car findById(String id) {
         return carRepositoryDao.findOne(id);
+    }
+
+    @Override
+    public Car save(Car car) {
+        return carRepositoryDao.save(car);
     }
 }

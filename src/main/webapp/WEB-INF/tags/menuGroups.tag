@@ -12,10 +12,10 @@
 
         <c:choose>
             <c:when test="${not empty menu.children}">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle list-group-item" data-toggle="dropdown">
+                <li class="dropdown menu-parent">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="${menuIcon}" aria-hidden="true"></i>
-                        ${menuText}
+                        <span class="link-name">${menuText}</span>
                         <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="dropdown-menu" style="display: none">
@@ -25,7 +25,10 @@
             </c:when>
             <c:otherwise>
                 <li>
-                    <a href="${menuUrl}" class="list-group-item"><i class="${menuIcon}" aria-hidden="true"></i> ${menuText} </a>
+                    <a href="${menuUrl}">
+                        <i class="${menuIcon}" aria-hidden="true"></i>
+                        <span class="link-name">${menuText}</span>
+                    </a>
                 </li>
             </c:otherwise>
         </c:choose>

@@ -2,6 +2,7 @@ package com.ptirador.concessionaire.views;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static com.ptirador.concessionaire.util.Constants.*;
 
 /**
  * View to build a spreadsheet document.
@@ -42,10 +45,10 @@ public class ExportListSpreadsheetView extends AbstractXlsxView {
                                       HttpServletResponse response) throws Exception {
 
         // Collect the data model
-        List<?> list = (List<?>) model.get("list");
-        List<String> cols = (List<String>) model.get("header");
-        List<String> ids = (List<String>) model.get("ids");
-        Object objFName = model.get("fileName");
+        List<?> list = (List<?>) model.get(MDL_BASE_LIST);
+        List<String> cols = (List<String>) model.get(MDL_BASE_HEADER);
+        List<String> ids = (List<String>) model.get(MDL_BASE_IDS);
+        Object objFName = model.get(MDL_BASE_FILENAME);
         String fileName = (String) (objFName != null ? objFName : DEFAULT_SPREADSHEET_NAME);
 
         // Sheet where the list will be filled
@@ -75,7 +78,7 @@ public class ExportListSpreadsheetView extends AbstractXlsxView {
         // Add auto size for columns.
         setColumnsSize(cols, sheet);
 
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName + DEFAULT_SPREADSHEET_EXTENSION);
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + DEFAULT_SPREADSHEET_EXTENSION);
 
     }
 

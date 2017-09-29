@@ -52,9 +52,9 @@ function exportToSpreadsheet(tableId, url) {
     // Header
     table.find('thead').find('tr').each(function () {
         $(this).filter(':visible').find('th').each(function (index) {
-            if ($(this).css('display') !== 'none' && $(this).text() !== '') {
+            if ($(this).css('display') !== 'none' && $.trim($(this).text()) !== '') {
                 // Decode accents
-                header[index] = decodeURIComponent($(this).text());
+                header[index] = decodeURIComponent($.trim($(this).text()));
                 // Field identifiers in bean
                 colIds[index] = $(this).attr('data-field');
             }

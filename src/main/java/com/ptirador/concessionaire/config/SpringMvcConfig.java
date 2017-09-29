@@ -22,6 +22,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 @Configuration
@@ -30,15 +31,15 @@ import java.util.Locale;
         "com.ptirador.concessionaire.security"})
 @EnableWebMvc
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SpringWebConfig extends WebMvcConfigurerAdapter {
+public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
-    private static final String RESOURCES_PATH = "/resources/**";
+    private static final String RESOURCES_LOCATION = "/resources/";
+    private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";
 
     private final UserRepository userRepository;
-
     private final MenuRepository menuRepository;
 
-    public SpringWebConfig(final UserRepository userRepository,
+    public SpringMvcConfig(final UserRepository userRepository,
                            final MenuRepository menuRepository) {
         this.userRepository = userRepository;
         this.menuRepository = menuRepository;
@@ -47,8 +48,8 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:messages/app");
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setBasename("classpath:messages/messages");
+        messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());
         return messageSource;
     }
 
@@ -83,8 +84,8 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(RESOURCES_PATH).addResourceLocations("/resources/")
-                .setCachePeriod(31556926);
+        registry.addResourceHandler(RESOURCES_HANDLER)
+                .addResourceLocations(RESOURCES_LOCATION);
     }
 
     @Override
@@ -118,11 +119,11 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new LocaleChangeInterceptor());
         registry.addInterceptor(new AccessControlInterceptor(userService(userRepository), localeResolver()))
                 .addPathPatterns("/**")
-                .excludePathPatterns(RESOURCES_PATH)
+                .excludePathPatterns(RESOURCES_HANDLER)
                 .excludePathPatterns("/general/**");
         registry.addInterceptor(new MenuInterceptor(menuService(menuRepository)))
                 .addPathPatterns("/**")
-                .excludePathPatterns(RESOURCES_PATH)
+                .excludePathPatterns(RESOURCES_HANDLER)
                 .excludePathPatterns("/general/**");
     }
 }

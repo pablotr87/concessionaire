@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="base" template="/WEB-INF/jsp/templates/template.jsp">
+
+        <put-attribute name="header" value="/WEB-INF/jsp/templates/header.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/templates/sidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/templates/footer.jsp"/>
+
+        <put-list-attribute name="onLoadJS">
+            <add-attribute value=""/>
+        </put-list-attribute>
+
+        <put-list-attribute name="filesJS">
+            <add-attribute value="/resources/js/jquery/jquery.min.js"/>
+            <add-attribute value="/resources/js/bootstrap/bootstrap.min.js"/>
+            <add-attribute value="/resources/js/concessionaire/base.js"/>
+        </put-list-attribute>
+
+        <put-list-attribute name="filesCSS">
+            <add-attribute value="/resources/css/bootstrap/bootstrap.min.css"/>
+            <add-attribute value="/resources/css/font-awesome/font-awesome.min.css"/>
+            <add-attribute value="/resources/css/fonts/courgette.css" />
+            <add-attribute value="/resources/css/concessionaire/base.css"/>
+        </put-list-attribute>
+
+    </definition>
+
+    <definition name="baseAdmin" extends="base">
+
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/indexAdmin.jsp" />
+
+        <put-list-attribute name="filesCSS" inherit="true">
+            <add-attribute value="/resources/css/concessionaire/admin/baseAdmin.css"/>
+        </put-list-attribute>
+
+    </definition>
+
+    <!-- ************************************************** -->
+    <!-- ******************* ERRORS *********************** -->
+    <!-- ************************************************** -->
+    <definition name="errorView" template="/WEB-INF/jsp/general/error.jsp"/>
+    <definition name="accessDeniedView" template="/WEB-INF/jsp/general/403.jsp"/>
+    <definition name="notFoundView" template="/WEB-INF/jsp/general/404.jsp"/>
+
+</tiles-definitions>

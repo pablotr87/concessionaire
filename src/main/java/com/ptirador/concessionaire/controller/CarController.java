@@ -2,21 +2,19 @@ package com.ptirador.concessionaire.controller;
 
 import com.ptirador.concessionaire.model.car.Car;
 import com.ptirador.concessionaire.service.car.CarService;
-import com.ptirador.concessionaire.util.Utils;
+import com.ptirador.concessionaire.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Home controller.
@@ -66,6 +64,14 @@ public class CarController extends BaseController<Car> {
      */
     private static final String MDL_CAR = "car";
     /**
+     * Message code for saving succesfully a car.
+     */
+    private static final String MSG_CAR_SAVE_OK = "car.save.ok";
+    /**
+     * Message code for failed saving of a car.
+     */
+    private static final String MSG_CAR_SAVE_KO = "car.save.ko";
+    /**
      * Interface service for car management.
      */
     private final CarService carService;
@@ -74,7 +80,7 @@ public class CarController extends BaseController<Car> {
      * Constructor.
      *
      * @param carService    Interface service for car management.
-     * @param messageSource
+     * @param messageSource Interface for resolving messages.
      */
     public CarController(final CarService carService,
                          final MessageSource messageSource) {
@@ -95,18 +101,16 @@ public class CarController extends BaseController<Car> {
     /**
      * Exports the full car list to JSON.
      *
-     * @param response HTTP response.
+     * @return Cars list in JSON format.
      */
-    @GetMapping(URL_CARS_JSON_LIST)
+    @GetMapping(value = URL_CARS_JSON_LIST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void getCarsList(HttpServletResponse response) {
-        Iterable<Car> carsList = carService.getAllCars();
-        Utils.exportToJson(response, carsList);
+    public Iterable<Car> getCarsList() {
+        return carService.getAllCars();
     }
 
     /**
      * Car detail.
-     *
      */
     @GetMapping(URL_CARS_DETAIL)
     public String getCarDetail(@PathVariable String id,
@@ -120,27 +124,25 @@ public class CarController extends BaseController<Car> {
      *
      * @param car
      * @param errors
-     * @param model
      * @param rda
-     * @param locale
      * @return
      */
-    @PostMapping(URL_SAVE_CAR)
-    public String saveCar( @ModelAttribute(MDL_CAR) @Valid Car car,
-                           Errors errors,
-                           Model model,
-                           RedirectAttributes rda,
-                           Locale locale) {
+    @PostMapping(value = URL_SAVE_CAR)
+    public String saveCar(@ModelAttribute(MDL_CAR) @Valid Car car,
+                          Errors errors,
+                          RedirectAttributes rda) {
 
-        String pageResultado = VIEW_CAR_DETAIL;
+        String resultPage = VIEW_CAR_DETAIL;
 
         if (errors.hasErrors()) {
             LOG.error("Error while saving a car");
         } else {
-
+            carService.save(car);
+            resultPage = Constants.REDIRECT + "/cars/detail/" + car.getId();
+            rda.addFlashAttribute(Constants.MSG, MSG_CAR_SAVE_OK);
         }
 
-        return VIEW_CAR_DETAIL;
+        return resultPage;
     }
 
     /**
@@ -156,10 +158,9 @@ public class CarController extends BaseController<Car> {
     @Override
     @SuppressWarnings("unchecked")
     public List<Car> getListToExport(String order, String sort, String search, String filter, Locale locale) {
-        Iterable<Car> iterable = carService.getAllCars();
-        List<Car> target = new ArrayList<>();
-        iterable.forEach(target::add);
-        return target;
+        //TODO: Export client side pagination filtered?
+        //TODO: Spring mongo has any fin by any field?
+        return carService.getAllCars();
     }
 
     /**

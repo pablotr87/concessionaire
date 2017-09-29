@@ -25,50 +25,57 @@
             </c:choose>
         </h2>
         <div class="clearfix"></div>
-        <c:if test="${not empty message}">
+        <c:if test="${not empty msg}">
             <p class="alert alert-success">
-                <i class="fa fa-check" aria-hidden="true"></i> <spring:message code="${message}"/>
+                <i class="fa fa-check" aria-hidden="true"></i> <spring:message code="${msg}"/>
             </p>
         </c:if>
-        <c:if test="${not empty messageError}">
+        <c:if test="${not empty errorMsg}">
             <p class="alert alert-danger">
-                <i class="fa fa-times" aria-hidden="true"></i> <spring:message code="${messageError}"/>
+                <i class="fa fa-times" aria-hidden="true"></i> <spring:message code="${errorMsg}"/>
             </p>
         </c:if>
     </div>
 
     <div class="x_content">
         <form:form id="carDetailForm" class="form-horizontal" modelAttribute="car" method="POST" action="${urlSaveCar}">
+            <form:hidden path="id"/>
 
             <div class="row">
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <form:label path="make" class="control-label">${msgMake}</form:label>
-                        <form:input path="make" class="form-control"/>
-                        <form:errors path="make" class="text-danger"/>
+                <spring:bind path="make">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <form:label path="make" class="control-label required">${msgMake}</form:label>
+                            <form:input path="make" class="form-control"/>
+                            <form:errors path="make" class="text-danger"/>
+                        </div>
                     </div>
-                </div>
+                </spring:bind>
             </div>
 
             <div class="row">
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <form:label path="model" class="control-label">${msgModel}</form:label>
-                        <form:input path="model" class="form-control"/>
-                        <form:errors path="model" class="text-danger"/>
+                <spring:bind path="model">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <form:label path="model" class="control-label required">${msgModel}</form:label>
+                            <form:input path="model" class="form-control"/>
+                            <form:errors path="model" class="text-danger"/>
+                        </div>
                     </div>
-                </div>
+                </spring:bind>
             </div>
 
             <div class="row">
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <form:label path="year" class="control-label">${msgYear}</form:label>
-                        <input type="number" id="year" name="year" value="${car.year}" class="form-control"
-                               title="${msgYear}"/>
-                        <form:errors path="year" class="text-danger"/>
+                <spring:bind path="year">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <form:label path="year" class="control-label required">${msgYear}</form:label>
+                            <input type="number" id="year" name="year" value="${car.year}" class="form-control"
+                                   title="${msgYear}"/>
+                            <form:errors path="year" class="text-danger"/>
+                        </div>
                     </div>
-                </div>
+                </spring:bind>
             </div>
 
             <div class="ln_solid"></div>
@@ -77,7 +84,7 @@
                 <i class="fa fa-reply" aria-hidden="true"></i> ${msgBack}
             </a>
             <div class="pull-right">
-                <button type="submit" class="btn btn-success">
+                <button class="btn btn-success">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i> ${msgSave}
                 </button>
             </div>

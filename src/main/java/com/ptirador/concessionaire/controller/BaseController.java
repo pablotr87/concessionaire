@@ -1,5 +1,6 @@
 package com.ptirador.concessionaire.controller;
 
+import com.ptirador.concessionaire.util.Constants;
 import org.springframework.context.MessageSource;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Locale;
+
+import static com.ptirador.concessionaire.util.Constants.*;
 
 /**
  * Abstract class that contains common variables and methods.
@@ -87,10 +90,10 @@ public abstract class BaseController<T> {
                                             @RequestParam(required = false) String sort,
                                             Locale locale) {
 
-        model.addAttribute("list", getListToExport(order, sort, search, filter, locale));
-        model.addAttribute("header", header);
-        model.addAttribute("ids", ids);
-        model.addAttribute("fileName", getExportFileName());
+        model.addAttribute(MDL_BASE_LIST, getListToExport(order, sort, search, filter, locale));
+        model.addAttribute(MDL_BASE_HEADER, header);
+        model.addAttribute(MDL_BASE_IDS, ids);
+        model.addAttribute(MDL_BASE_FILENAME, getExportFileName());
         return VIEW_SPREADSHEET;
     }
 }

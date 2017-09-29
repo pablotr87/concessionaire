@@ -11,44 +11,57 @@
 <spring:url var="urlAdmin" value="/administration"/>
 <spring:url var="urlExitAdmin" value="/"/>
 
-<sec:authorize var="isAdmin" access="hasAuthority('ADMIN')" />
-<sec:authorize var="isUser" access="hasAuthority('USER')" />
+<sec:authorize var="isAdmin" access="hasAuthority('ADMIN')"/>
+<sec:authorize var="isUser" access="hasAuthority('USER')"/>
 
-<div class="navbar-header">
-    <a class="navbar-brand" href="#">
-        <i class="fa fa-car fa-2x" aria-hidden="true"></i>
-    </a>
-</div>
-<nav class="collapse navbar-collapse">
-    <ul class="nav navbar-nav pull-right">
-        <c:if test="${isAdmin and menu.typeId eq 1}">
-            <li>
-                <a href="${urlAdmin}"><i class="fa fa-cog" aria-hidden="true"></i> ${msgAdministration}</a>
-            </li>
-        </c:if>
-        <c:if test="${menu.typeId eq 2}">
-            <li>
-                <a href="${urlExitAdmin}"><i class="fa fa-sign-out" aria-hidden="true"></i> ${msgExit}</a>
-            </li>
-        </c:if>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            <i class="fa fa-car fa-2x" aria-hidden="true"></i>
+        </a>
+    </div>
 
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
-                ${user.username}
-            </a>
-            <ul class="dropdown-menu pull-right">
+    <!-- Group navigation links, forms and any other item that can be hidden by minimizing the bar -->
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                    <span class="sr-only">Expand navigation</span>
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <c:if test="${isAdmin and menu.typeId eq 1}">
                 <li>
-                    <form:form action="${urlLogOut}" method="POST">
-                        <button type="submit" class="btn btn-danger col-md-12 col-sm-12 col-xs-12">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i>
-                            <span>${msgLogOut}</span>
-                        </button>
-                    </form:form>
+                    <a href="${urlAdmin}"><i class="fa fa-cog" aria-hidden="true"></i> ${msgAdministration}</a>
                 </li>
-            </ul>
-        </li>
-    </ul>
+            </c:if>
+            <c:if test="${menu.typeId eq 2}">
+                <li>
+                    <a href="${urlExitAdmin}"><i class="fa fa-sign-out" aria-hidden="true"></i> ${msgExit}</a>
+                </li>
+            </c:if>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+                    ${user.username}
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <form:form action="${urlLogOut}" method="POST">
+                            <button type="submit" class="btn btn-danger col-md-12 col-sm-12 col-xs-12">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <span>${msgLogOut}</span>
+                            </button>
+                        </form:form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <script type="text/javascript">

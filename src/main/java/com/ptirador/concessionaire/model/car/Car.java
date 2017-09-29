@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Bean that represents a car.
@@ -23,19 +24,20 @@ public class Car {
     /**
      * Make name.
      */
-    @NotEmpty(message = "error.mandatoryField")
+    @NotEmpty(message = "{error.mandatoryField}")
     private String make;
 
     /**
      * Model name.
      */
-    @NotEmpty(message = "error.mandatoryField")
+    @NotEmpty(message = "{error.mandatoryField}")
     private String model;
 
     /**
      * Model year.
      */
-    @NotEmpty(message = "error.mandatoryField")
+    @Min(value = 1860, message = "{error.year.greaterThan}")
+    @NotNull(message = "{error.mandatoryField}")
     private Integer year;
 
     public String getId() {

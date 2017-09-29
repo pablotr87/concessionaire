@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<spring:message var="msgAppTitle" code="app.title"/>
+<spring:message var="msgAppTitle" code="application.title"/>
 <spring:message var="msgAdmin" code="administration.title"/>
 
 <div class="x_panel">

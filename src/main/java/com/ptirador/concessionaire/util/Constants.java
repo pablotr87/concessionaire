@@ -74,6 +74,27 @@ public final class Constants {
     public static final Integer MENU_ADMIN_ID = 2;
 
     /**
+     * Model attribute that represents the list to export.
+     */
+    public static final String MDL_BASE_LIST = "list";
+
+    /**
+     * Model attribute that represents the header names to export.
+     */
+    public static final String MDL_BASE_HEADER = "header";
+
+    /**
+     * Model attribute that represents the header ids to export.
+     */
+    public static final String MDL_BASE_IDS = "ids";
+
+    /**
+     * Model attribute that represents the file name to export.
+     */
+    public static final String MDL_BASE_FILENAME = "fileName";
+
+
+    /**
      * Model attribute for a list to export.
      */
     public static final String MDL_BASE_LIST = "list";

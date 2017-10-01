@@ -1,10 +1,13 @@
 package com.ptirador.concessionaire.controller.advice;
 
+import com.ptirador.concessionaire.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
@@ -49,6 +52,7 @@ public class ExceptionHandlerAdvice {
      * @param e Access denied exception object.
      * @return Acess denied error view name.
      */
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class)
     public String handleAccessDeniedException(final AccessDeniedException e) {
         LOG.error("Access denied error", e);
@@ -59,8 +63,9 @@ public class ExceptionHandlerAdvice {
      * @param e Handler not found exception object.
      * @return No handler found view name.
      */
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public String handleNotFoundException(final NoHandlerFoundException e) {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({NoHandlerFoundException.class, ResourceNotFoundException.class})
+    public String handleNotFoundException(final Exception e) {
         LOG.error("Resource URL was not found", e);
         return VIEW_NOT_FOUND_ERROR;
     }

@@ -1,6 +1,5 @@
 package com.ptirador.concessionaire.controller;
 
-import com.ptirador.concessionaire.util.Constants;
 import org.springframework.context.MessageSource;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,11 +52,10 @@ public abstract class BaseController<T> {
      * @param order
      * @param sort
      * @param search
-     * @param filter
      * @param locale
      * @return
      */
-    public abstract List<T> getListToExport(String order, String sort, String search, String filter, Locale locale);
+    public abstract List<T> getListToExport(String order, String sort, String search, Locale locale);
 
     /**
      * File name to export.
@@ -74,7 +72,6 @@ public abstract class BaseController<T> {
      * @param ids
      * @param order
      * @param search
-     * @param filter
      * @param sort
      * @param locale
      * @return
@@ -86,11 +83,10 @@ public abstract class BaseController<T> {
                                             @RequestParam List<String> ids,
                                             @RequestParam(required = false) String order,
                                             @RequestParam(required = false) String search,
-                                            @RequestParam(required = false) String filter,
                                             @RequestParam(required = false) String sort,
                                             Locale locale) {
 
-        model.addAttribute(MDL_BASE_LIST, getListToExport(order, sort, search, filter, locale));
+        model.addAttribute(MDL_BASE_LIST, getListToExport(order, sort, search, locale));
         model.addAttribute(MDL_BASE_HEADER, header);
         model.addAttribute(MDL_BASE_IDS, ids);
         model.addAttribute(MDL_BASE_FILENAME, getExportFileName());

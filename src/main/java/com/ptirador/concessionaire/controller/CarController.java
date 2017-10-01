@@ -1,5 +1,6 @@
 package com.ptirador.concessionaire.controller;
 
+import com.ptirador.concessionaire.exception.ResourceNotFoundException;
 import com.ptirador.concessionaire.model.car.Car;
 import com.ptirador.concessionaire.service.car.CarService;
 import com.ptirador.concessionaire.util.Constants;
@@ -54,7 +55,7 @@ public class CarController extends BaseController<Car> {
     /**
      * Cars detail URL.
      */
-    private static final String URL_CARS_DETAIL = "/detail/{id}";
+    private static final String URL_CARS_DETAIL = "/detail/{id:.+}";
     /**
      * URL that saves a car.
      */
@@ -103,10 +104,10 @@ public class CarController extends BaseController<Car> {
      *
      * @return Cars list in JSON format.
      */
-    @GetMapping(value = URL_CARS_JSON_LIST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_CARS_JSON_LIST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public Iterable<Car> getCarsList() {
-        return carService.getAllCars();
+        return carService.findAll();
     }
 
     /**
@@ -115,7 +116,12 @@ public class CarController extends BaseController<Car> {
     @GetMapping(URL_CARS_DETAIL)
     public String getCarDetail(@PathVariable String id,
                                Model model) {
-        model.addAttribute(MDL_CAR, carService.findById(id));
+        Car car = carService.findById(id);
+        if (null == car) {
+            throw new ResourceNotFoundException();
+        }
+
+        model.addAttribute(MDL_CAR, car);
         return VIEW_CAR_DETAIL;
     }
 
@@ -148,19 +154,16 @@ public class CarController extends BaseController<Car> {
     /**
      * Method to be implemented by children classes to resolve the list to export.
      *
-     * @param order
-     * @param sort
+     * @param order sort order.
+     * @param sort sort field.
      * @param search Text to query in JSON format.
-     * @param filter
      * @param locale Object that represents country/language.
      * @return
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Car> getListToExport(String order, String sort, String search, String filter, Locale locale) {
-        //TODO: Export client side pagination filtered?
-        //TODO: Spring mongo has any fin by any field?
-        return carService.getAllCars();
+    public List<Car> getListToExport(String order, String sort, String search, Locale locale) {
+        return carService.findByAnyField(search, sort, order);
     }
 
     /**

@@ -1,18 +1,22 @@
 package com.ptirador.concessionaire.config;
 
-import com.mongodb.*;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 @Configuration
 @EnableMongoRepositories(basePackages = {
@@ -40,8 +44,8 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Value("${spring.data.mongodb.basePackage}")
     private String dbBasePackage;
 
-    @Value("${spring.data.mongodb.username}")
-    private String dbUserName;
+    @Value("${spring.data.mongodb.user}")
+    private String dbUser;
 
     @Value("${spring.data.mongodb.password}")
     private String dbPassword;
@@ -57,28 +61,15 @@ public class MongoConfig extends AbstractMongoConfiguration {
     }
 
     @Override
-    public MongoClient mongo() throws Exception {
+    @Bean
+    public Mongo mongo() throws Exception {
         ServerAddress serverAddress = new ServerAddress(dbHost, dbPort);
         return new MongoClient(serverAddress, getCredentialsList());
     }
 
     private List<MongoCredential> getCredentialsList() {
-        return Collections.singletonList(MongoCredential.createCredential(dbUserName, getDatabaseName(),
-                dbPassword.toCharArray()));
+        return singletonList(MongoCredential.createCredential(dbUser, getDatabaseName(), dbPassword.toCharArray()));
     }
-
-    @Override
-    @Bean
-    public SimpleMongoDbFactory mongoDbFactory() throws Exception {
-        return new SimpleMongoDbFactory(mongo(), getDatabaseName());
-    }
-
-    @Override
-    @Bean
-    public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(mongoDbFactory());
-    }
-
 
     @Override
     protected Collection<String> getMappingBasePackages() {

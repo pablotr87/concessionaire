@@ -30,9 +30,25 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAllCars() {
-        Sort sortByMakeAndModel = new Sort(Sort.Direction.ASC, "make", "model", "year");
-        return carRepositoryDao.findAll(sortByMakeAndModel);
+    public List<Car> findAll() {
+        Sort sort = getDefaultSort();
+        return carRepositoryDao.findAll(sort);
+    }
+
+    private Sort getDefaultSort() {
+        return new Sort(Sort.Direction.ASC, "make", "model", "year");
+    }
+
+    @Override
+    public List<Car> findByAnyField(String search, String sortField, String order) {
+        Sort sort;
+        if ("undefined".equals(sortField)) {
+            sort = getDefaultSort();
+        } else {
+            sort = new Sort(Sort.Direction.fromString(order), sortField);
+        }
+
+        return carRepositoryDao.findByMakeLikeOrModelLikeAllIgnoreCase(search, search, sort);
     }
 
     @Override

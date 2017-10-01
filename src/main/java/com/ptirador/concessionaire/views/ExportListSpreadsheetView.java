@@ -41,7 +41,9 @@ public class ExportListSpreadsheetView extends AbstractXlsxView {
      */
     @Override
     @SuppressWarnings("unchecked")
-    protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
+    protected void buildExcelDocument(Map<String, Object> model,
+                                      Workbook workbook,
+                                      HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
 
         // Collect the data model

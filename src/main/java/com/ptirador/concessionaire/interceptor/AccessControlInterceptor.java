@@ -3,19 +3,17 @@ package com.ptirador.concessionaire.interceptor;
 import com.ptirador.concessionaire.model.User;
 import com.ptirador.concessionaire.service.UserService;
 import com.ptirador.concessionaire.util.Constants;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import java.io.IOException;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import java.io.IOException;
+import java.util.Locale;
 
 /**
  * @author ptirador
@@ -75,28 +73,26 @@ public class AccessControlInterceptor extends HandlerInterceptorAdapter {
                                     final HttpServletResponse response) {
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute(Constants.USER_LOGIN);
+        // Checking user registered in the application.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         // If user access for first time...
-        if (StringUtils.isEmpty(sessionUser)) {
-            // Checking user registered in the application.
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (null != auth) {
-                String username = auth.getName();
-                User dbUser = userService.findByUsername(username);
-                this.setUserExists(null != dbUser);
-                if (isUserExists()) {
+        if (null == sessionUser && null != auth) {
+            String username = auth.getName();
+            User dbUser = userService.findByUsername(username);
+            this.setUserExists(null != dbUser);
+            if (isUserExists()) {
 
-                    sessionUser = dbUser;
+                sessionUser = dbUser;
 
-                    // Set locale for user
-                    Locale locale = Locale.getDefault();
-                    this.localeResolver.setLocale(request, response, locale);
-                    if (null != sessionUser) {
-                        sessionUser.setLanguage(locale.getLanguage());
+                // Set locale for user
+                Locale locale = Locale.getDefault();
+                this.localeResolver.setLocale(request, response, locale);
+                if (null != sessionUser) {
+                    sessionUser.setLanguage(locale.getLanguage());
 
-                        // Add user bean to session to not query again in DB.
-                        session.setAttribute(Constants.USER_LOGIN, sessionUser);
-                    }
+                    // Add user bean to session to not query again in DB.
+                    session.setAttribute(Constants.USER_LOGIN, sessionUser);
                 }
             }
         }

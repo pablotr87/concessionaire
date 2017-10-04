@@ -1,40 +1,111 @@
-group = 'com.ptirador'
-version = '1.0-SNAPSHOT'
+allprojects {
+    group = 'com.ptirador'
+    version = '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-apply plugin: 'war'
+    apply plugin: 'java'
+    apply plugin: 'war'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+    // Make sure transitive project dependencies are resolved
+    configurations.compile.transitive = true
 
-repositories {
-    mavenCentral()
+    configurations {
+        all*.exclude group: "commons-logging", module: "commons-logging"
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+// We define versions for the libraries we will be using
+ext {
+    mongoDbVersion = '1.0'
+    slf4jVersion = '1.7.25'
+    springVersion = '4.3.11.RELEASE'
+    springMongoVersion = '1.10.7.RELEASE'
+    springSecurityVersion = '4.2.3.RELEASE'
+    junitVersion = '4.12'
+    jstlVersion = '1.2'
+    tilesVersion = '3.0.7'
+    hibernateVersion = '6.0.2.Final'
+    poiVersion = '3.17'
+    jacksonVersion = '2.9.1'
+    servletApiVersion = '3.1.0'
+    taglibsVersion = '1.1.2'
+    validationApiVersion = '2.0.0.Final'
 }
 
 dependencies {
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
-    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
-    compile group: 'taglibs', name: 'standard', version: '1.1.2'
-    compile(group: 'org.springframework', name: 'spring-context', version: '4.3.11.RELEASE') {
-        exclude(module: 'commons-logging')
-    }
-    compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.11.RELEASE'
-    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.11.RELEASE'
-    compile group: 'org.springframework', name: 'spring-web', version: '4.3.11.RELEASE'
-    compile group: 'org.springframework', name: 'spring-beans', version: '4.3.11.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '1.10.7.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.3.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.3.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.2.3.RELEASE'
-    compile group: 'org.apache.tiles', name: 'tiles-jsp', version: '3.0.7'
-    compile group: 'org.apache.tiles', name: 'tiles-core', version: '3.0.7'
-    compile group: 'org.apache.tiles', name: 'tiles-api', version: '3.0.7'
-    compile group: 'org.apache.tiles', name: 'tiles-servlet', version: '3.0.7'
-    compile group: 'org.apache.tiles', name: 'tiles-template', version: '3.0.7'
-    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
-    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.1'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.1'
-    compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.2.Final'
+    compile group: "javax.servlet", name: "javax.servlet-api", version: "$servletApiVersion"
+    compile group: "javax.servlet", name: "jstl", version: "$jstlVersion"
+    compile group: "taglibs", name: "standard", version: "$taglibsVersion"
+    compile group: "org.springframework", name: "spring-context", version: "$springVersion"
+    compile group: "org.springframework", name: "spring-context-support", version: "$springVersion"
+    compile group: "org.springframework", name: "spring-webmvc", version: "$springVersion"
+    compile group: "org.springframework", name: "spring-web", version: "$springVersion"
+    compile group: "org.springframework", name: "spring-beans", version: "$springVersion"
+    compile group: "org.springframework.data", name: "spring-data-mongodb", version: "$springMongoVersion"
+    compile group: "org.springframework.security", name: "spring-security-web", version: "$springSecurityVersion"
+    compile group: "org.springframework.security", name: "spring-security-config", version: "$springSecurityVersion"
+    compile group: "org.springframework.security", name: "spring-security-taglibs", version: "$springSecurityVersion"
+    compile group: "org.apache.tiles", name: "tiles-jsp", version: "$tilesVersion"
+    compile group: "org.apache.tiles", name: "tiles-core", version: "$tilesVersion"
+    compile group: "org.apache.tiles", name: "tiles-api", version: "$tilesVersion"
+    compile group: "org.apache.tiles", name: "tiles-servlet", version: "$tilesVersion"
+    compile group: "org.apache.tiles", name: "tiles-template", version: "$tilesVersion"
+    compile group: "org.apache.poi", name: "poi", version: "$poiVersion"
+    compile group: "org.apache.poi", name: "poi-ooxml", version: "$poiVersion"
+    compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "$jacksonVersion"
+    compile group: "com.fasterxml.jackson.core", name: "jackson-core", version: "$jacksonVersion"
+    compile group: "javax.validation", name: "validation-api", version: "$validationApiVersion"
+    compile group: "org.hibernate", name: "hibernate-validator", version: "$hibernateVersion"
 }
+
+task allDeps << {
+    description 'Task used to display dependencies for all modules in the project'
+
+    allprojects.each { p ->
+        println()
+        println " $p.name ".center(60, '*')
+        println()
+        configurations.all.findAll { !it.allDependencies.empty }.each { c ->
+            println " ${c.name} ".center(60, '-')
+            c.allDependencies.each { dep ->
+                println "$dep.group:$dep.name:$dep.version"
+            }
+            println "-" * 60
+        }
+    }
+
+}
+
+
+task allCompile << {
+    description 'Task used to compile all modules in the project without running tests'
+    allprojects.each { p ->
+        p.getTasksByName("clean", true).each { t ->
+            println "-> $p.name [CLEAN]"
+            t.execute();
+        }
+        p.getTasksByName("compileJava", true).each { t ->
+            println "-> $p.name [COMPILE]"
+            t.execute();
+        }
+        p.getTasksByName("classes", true).each { t ->
+            println "-> $p.name [CLASSES]"
+            t.execute();
+        }
+        p.getTasksByName("war", true).each { t ->
+            println "-> $p.name [WAR]"
+            t.execute();
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
+}
+

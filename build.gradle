@@ -22,12 +22,10 @@ allprojects {
 
 // We define versions for the libraries we will be using
 ext {
-    mongoDbVersion = '1.0'
     slf4jVersion = '1.7.25'
     springVersion = '4.3.11.RELEASE'
     springMongoVersion = '1.10.7.RELEASE'
     springSecurityVersion = '4.2.3.RELEASE'
-    junitVersion = '4.12'
     jstlVersion = '1.2'
     tilesVersion = '3.0.7'
     hibernateVersion = '6.0.2.Final'
@@ -36,32 +34,48 @@ ext {
     servletApiVersion = '3.1.0'
     taglibsVersion = '1.1.2'
     validationApiVersion = '2.0.0.Final'
+
+    // We group libraries by their purpose so we can import them easier in the modules
+    misc = [
+            slf4jApi       : "org.slf4j:slf4j-api:$slf4jVersion",
+            jstl           : "javax.servlet:jstl:$jstlVersion",
+            tilesJsp       : "org.apache.tiles:tiles-jsp:$tilesVersion",
+            poi            : "org.apache.poi:poi:${poiVersion}",
+            poiOoxml       : "org.apache.poi:poi-ooxml:${poiVersion}",
+            jacksonCore    : "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+            jacksonDatabind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+    ]
+
+    hibernate = [
+            validator: "org.hibernate:hibernate-validator:$hibernateVersion",
+    ]
+
+
+    spring = [
+            data           : "org.springframework.data:spring-data-mongodb:$springMongoVersion",
+            web            : "org.springframework:spring-web:$springVersion",
+            webmvc         : "org.springframework:spring-webmvc:$springVersion",
+            contextSupport : "org.springframework:spring-context-support:$springVersion",
+            securityWeb    : "org.springframework.security:spring-security-web:$springSecurityVersion",
+            securityTaglibs: "org.springframework.security:spring-security-taglibs:$springSecurityVersion",
+            securityConfig : "org.springframework.security:spring-security-config:$springSecurityVersion"
+    ]
+
+    others = [
+            servletApi   : "javax.servlet:javax.servlet-api:$servletApiVersion",
+            standard     : "taglibs:standard:$taglibsVersion",
+            validationApi: "javax.validation:validation-api:$validationApiVersion"
+    ]
 }
 
 dependencies {
-    compile group: "javax.servlet", name: "javax.servlet-api", version: "$servletApiVersion"
-    compile group: "javax.servlet", name: "jstl", version: "$jstlVersion"
-    compile group: "taglibs", name: "standard", version: "$taglibsVersion"
-    compile group: "org.springframework", name: "spring-context", version: "$springVersion"
-    compile group: "org.springframework", name: "spring-context-support", version: "$springVersion"
-    compile group: "org.springframework", name: "spring-webmvc", version: "$springVersion"
-    compile group: "org.springframework", name: "spring-web", version: "$springVersion"
-    compile group: "org.springframework", name: "spring-beans", version: "$springVersion"
-    compile group: "org.springframework.data", name: "spring-data-mongodb", version: "$springMongoVersion"
-    compile group: "org.springframework.security", name: "spring-security-web", version: "$springSecurityVersion"
-    compile group: "org.springframework.security", name: "spring-security-config", version: "$springSecurityVersion"
-    compile group: "org.springframework.security", name: "spring-security-taglibs", version: "$springSecurityVersion"
-    compile group: "org.apache.tiles", name: "tiles-jsp", version: "$tilesVersion"
-    compile group: "org.apache.tiles", name: "tiles-core", version: "$tilesVersion"
-    compile group: "org.apache.tiles", name: "tiles-api", version: "$tilesVersion"
-    compile group: "org.apache.tiles", name: "tiles-servlet", version: "$tilesVersion"
-    compile group: "org.apache.tiles", name: "tiles-template", version: "$tilesVersion"
-    compile group: "org.apache.poi", name: "poi", version: "$poiVersion"
-    compile group: "org.apache.poi", name: "poi-ooxml", version: "$poiVersion"
-    compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "$jacksonVersion"
-    compile group: "com.fasterxml.jackson.core", name: "jackson-core", version: "$jacksonVersion"
-    compile group: "javax.validation", name: "validation-api", version: "$validationApiVersion"
-    compile group: "org.hibernate", name: "hibernate-validator", version: "$hibernateVersion"
+    compile misc.slf4jApi, misc.jstl, misc.tilesJsp, misc.poi, misc.poiOoxml,
+            misc.jacksonCore, misc.jacksonDatabind,
+            hibernate.validator,
+            spring.data, spring.web, spring.webmvc, spring.contextSupport,
+            spring.securityWeb, spring.securityTaglibs, spring.securityConfig,
+            others.servletApi, others.standard, others.validationApi
+
 }
 
 task allDeps << {

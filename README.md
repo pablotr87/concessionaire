@@ -1,5 +1,5 @@
 # Concessionaire
-This project may serve as a guide to any developer integrating Spring with MongoDB.
+This project may serve as a guide to any developer integrating Spring (Data, MVC, Security) with MongoDB.
 
 ## Technology Stack
 The project uses the following technologies: <br/>

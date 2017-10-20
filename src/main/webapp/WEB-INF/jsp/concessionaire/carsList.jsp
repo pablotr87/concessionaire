@@ -10,7 +10,7 @@
 <spring:message var="msgExportToSpreadSheet" code="general.exportToSpreadsheet"/>
 <spring:message var="exportButton" code="button.export"/>
 
-<spring:url var="urlCarsList" value="/cars/jsonList"/>
+<spring:url var="urlCarsList" value="/cars/list/json"/>
 <spring:url var="urlExport" value="/cars/exportToSpreadsheet"/>
 
 <div class="row">

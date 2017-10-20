@@ -17,25 +17,5 @@
     "alt": "menu.cars.list.alt",
     "text": "menu.cars.list.alt",
     "icon": "fa fa-list-ul"
-  },
-  {
-    "_id": "11",
-    "typeId": 2,
-    "parentId": "0",
-    "order": 1,
-    "url": "/administration/users",
-    "alt": "menu,administration.users.alt",
-    "text": "menu.administration.users.text",
-    "icon": "fa fa-users"
-  },
-  {
-    "_id": "12",
-    "typeId": 2,
-    "parentId": "0",
-    "order": 2,
-    "url": "/administration/cars",
-    "alt": "menu.administration.cars.alt",
-    "text": "menu.administration.cars.text",
-    "icon": "fa fa-car"
   }
 ]

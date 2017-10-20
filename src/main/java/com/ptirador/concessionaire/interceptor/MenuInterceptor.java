@@ -73,13 +73,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
                     session.setAttribute(S_MENUS_LIST, menusList);
                 }
 
-                String path = request.getRequestURL().toString();
-
-                if (path.contains("/administration")) {
-                    session.setAttribute(S_MENU, getMenusByType(menusList, Constants.MENU_ADMIN_ID));
-                } else {
-                    session.setAttribute(S_MENU, getMenusByType(menusList, Constants.MENU_GENERAL_ID));
-                }
+                session.setAttribute(S_MENU, getMenusByType(menusList, Constants.MENU_GENERAL_ID));
 
             }
         }

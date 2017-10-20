@@ -28,16 +28,6 @@
 
     </definition>
 
-    <definition name="baseAdmin" extends="base">
-
-        <put-attribute name="content" value="/WEB-INF/jsp/admin/indexAdmin.jsp" />
-
-        <put-list-attribute name="filesCSS" inherit="true">
-            <add-attribute value="/resources/css/concessionaire/admin/baseAdmin.css"/>
-        </put-list-attribute>
-
-    </definition>
-
     <!-- ************************************************** -->
     <!-- ******************* ERRORS *********************** -->
     <!-- ************************************************** -->

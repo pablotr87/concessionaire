@@ -28,6 +28,10 @@ Secondary color:  #2C333E
     color: white;
 }
 
+.navbar-nav {
+    margin: 7px -15px;
+}
+
 .dropdown-menu > li > a:focus,
 .dropdown-menu > li > a:hover {
     background-color: #00C3D2;
@@ -50,10 +54,26 @@ Secondary color:  #2C333E
 
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
-   background-color: transparent;
+    background-color: transparent;
 }
 
-    /** /Top bar **/
+.navbar-right {
+    margin-right: 15px;
+}
+
+.navbar-right > li {
+    margin: 15px 20px 10px 20px;
+}
+
+.navbar-right > li.user-panel {
+    color: white;
+}
+
+.navbar-right > li.user-panel > i.fa {
+    vertical-align: middle;
+}
+
+/** /Top bar **/
 
 /** Sidebar **/
 #sidebar-wrapper {
@@ -75,28 +95,41 @@ Secondary color:  #2C333E
 }
 
 #sidebar li.menu-parent {
-    padding: 0 10px;
     margin-bottom: 10px;
 }
 
-#sidebar li.menu-parent a {
+#sidebar li.menu-parent > ul {
+    margin-left: 10px;
+}
+
+#sidebar li.menu-parent > a,
+#sidebar li.menu-parent > ul > li > a {
     background-color: transparent;
     color: #97a0b7;
     display: block;
     padding: 10px 20px 10px 12px;
     position: relative;
     font-size: 13px;
-    border: 0;
     border-radius: 4px;
 }
 
-#sidebar li.menu-parent a:hover {
-    color: #fff;
+#sidebar li.menu-parent > a:hover {
+    color: white;
     background-color: #7a828b;
-    background-image: linear-gradient(to bottom,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
+    border-color: white;
 }
 
-#sidebar li.menu-parent a  > span.fa {
+#sidebar li.menu-parent > ul:hover {
+    background-color: #7a828b;
+    border-color: white;
+}
+
+#sidebar li.menu-parent > ul > li > a:hover {
+    color: #fff;
+}
+
+#sidebar li.menu-parent > a > span.fa {
     float: right;
 }
 
@@ -133,8 +166,6 @@ Secondary color:  #2C333E
         font-size: 18px;
     }
 }
-
-
 
 .link-name {
     font-weight: 600;
@@ -323,6 +354,21 @@ table.table thead {
     background-image: -webkit-linear-gradient(top, #00C3D2 0%, #126A94 100%); /* Webkit (Chrome 11+) */
     background-image: linear-gradient(to bottom, #00C3D2 0%, #126A94 100%); /* W3C Markup */
     border-color: #126A94
+}
+
+.btn-success:hover {
+    background-image: -ms-linear-gradient(top, #126A94 0%, #126A94 100%); /* IE10+ */
+    background-image: -moz-linear-gradient(top, #126A94 0%, #126A94 100%); /* Mozilla Firefox */
+    background-image: -o-linear-gradient(top, #126A94 0%, #126A94 100%); /* Opera */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #126A94), color-stop(100, #126A94)); /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-linear-gradient(top, #126A94 0%, #126A94 100%); /* Webkit (Chrome 11+) */
+    background-image: linear-gradient(to bottom, #126A94 0%, #126A94 100%); /* W3C Markup */
+    border-color: #126A94
+}
+
+.btn-default:hover {
+    color: white;
+    background-color: #7a828b;
 }
 
 .btn-success > .text-success {

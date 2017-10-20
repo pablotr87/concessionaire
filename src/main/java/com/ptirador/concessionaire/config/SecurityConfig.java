@@ -18,8 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import static com.ptirador.concessionaire.util.Constants.ROLE_ADMIN;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -57,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/signup").permitAll()
                     .antMatchers("/404").permitAll()
-                    .antMatchers("/administration/**").hasAuthority(ROLE_ADMIN)
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

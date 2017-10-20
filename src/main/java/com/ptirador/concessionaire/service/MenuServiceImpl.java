@@ -42,9 +42,6 @@ public class MenuServiceImpl implements MenuService {
         MenuWrapper menuWrapperGeneral = getMenu(Constants.MENU_GENERAL_ID, roleId);
         menuWrappers.add(menuWrapperGeneral);
 
-        MenuWrapper menuWrapperAdmin = getMenu(Constants.MENU_ADMIN_ID, roleId);
-        menuWrappers.add(menuWrapperAdmin);
-
         return menuWrappers;
     }
 

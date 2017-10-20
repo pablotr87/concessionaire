@@ -91,7 +91,7 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/accessDenied").setViewName("accessDeniedView");
-        registry.addViewController("/administration").setViewName("initAdminView");
+        registry.addViewController("/cars/list").setViewName("carsListView");
     }
 
     @Override
@@ -106,7 +106,6 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
         tilesConfigurer.setDefinitions(
                 "classpath:tiles/base-tiles.xml",
-                "classpath:tiles/admin-tiles.xml",
                 "classpath:tiles/general-tiles.xml"
         );
         tilesConfigurer.setCheckRefresh(true);

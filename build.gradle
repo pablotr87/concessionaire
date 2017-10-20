@@ -28,7 +28,7 @@ ext {
     springSecurityVersion = '4.2.3.RELEASE'
     jstlVersion = '1.2'
     tilesVersion = '3.0.7'
-    hibernateVersion = '6.0.2.Final'
+    hibernateVersion = '5.4.1.Final'
     poiVersion = '3.17'
     jacksonVersion = '2.9.1'
     servletApiVersion = '3.1.0'

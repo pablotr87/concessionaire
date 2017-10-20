@@ -1,7 +1,6 @@
 package com.ptirador.concessionaire.repository.car;
 
 import com.ptirador.concessionaire.model.car.Car;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

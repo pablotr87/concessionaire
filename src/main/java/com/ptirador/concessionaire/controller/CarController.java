@@ -10,12 +10,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Home controller.
@@ -31,27 +32,17 @@ public class CarController extends BaseController<Car> {
      */
     private static final Logger LOG = LoggerFactory.getLogger(CarController.class);
     /**
-     * Cars list view name.
-     */
-    private static final String VIEW_CARS = "carsListView";
-
-    /**
      * Car detail view.
      */
     private static final String VIEW_CAR_DETAIL = "carDetailView";
-
     /**
      * Export file name.
      */
     private static final String EXPORT_FILE_NAME = "carsList";
     /**
-     * Cars list URL.
-     */
-    private static final String URL_CARS_LIST = "/list";
-    /**
      * Cars JSON list URL.
      */
-    private static final String URL_CARS_JSON_LIST = "/jsonList";
+    private static final String URL_CARS_JSON_LIST = "/list/json";
     /**
      * Cars detail URL.
      */
@@ -65,11 +56,11 @@ public class CarController extends BaseController<Car> {
      */
     private static final String MDL_CAR = "car";
     /**
-     * Message code for saving succesfully a car.
+     * Message code for saving successfully a car.
      */
     private static final String MSG_CAR_SAVE_OK = "car.save.ok";
     /**
-     * Message code for failed saving of a car.
+     * Message code for error when saving a car.
      */
     private static final String MSG_CAR_SAVE_KO = "car.save.ko";
     /**
@@ -87,16 +78,6 @@ public class CarController extends BaseController<Car> {
                          final MessageSource messageSource) {
         super(messageSource);
         this.carService = carService;
-    }
-
-    /**
-     * Mapping for cars list page.
-     *
-     * @return Cars list view.
-     */
-    @GetMapping(URL_CARS_LIST)
-    public String getCars() {
-        return VIEW_CARS;
     }
 
     /**
@@ -129,19 +110,21 @@ public class CarController extends BaseController<Car> {
      * Saves an existing car.
      *
      * @param car
-     * @param errors
+     * @param result
      * @param rda
      * @return
      */
     @PostMapping(value = URL_SAVE_CAR)
     public String saveCar(@ModelAttribute(MDL_CAR) @Valid Car car,
-                          Errors errors,
+                          BindingResult result,
+                          Model model,
                           RedirectAttributes rda) {
 
         String resultPage = VIEW_CAR_DETAIL;
 
-        if (errors.hasErrors()) {
+        if (result.hasErrors()) {
             LOG.error("Error while saving a car");
+            model.addAttribute(Constants.MSG_ERROR, MSG_CAR_SAVE_KO);
         } else {
             carService.save(car);
             resultPage = Constants.REDIRECT + "/cars/detail/" + car.getId();

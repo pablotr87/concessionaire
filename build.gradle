@@ -34,6 +34,11 @@ ext {
     servletApiVersion = '3.1.0'
     taglibsVersion = '1.1.2'
     validationApiVersion = '2.0.0.Final'
+    webjarsLocatorVersion = '0.32'
+    jqueryVersion = '3.2.1'
+    bootstrapVersion = '3.3.7'
+    bootstrapTableVersion = '1.9.1'
+    fontAwesomeVersion = '4.7.0'
 
     // We group libraries by their purpose so we can import them easier in the modules
     misc = [
@@ -66,6 +71,14 @@ ext {
             standard     : "taglibs:standard:$taglibsVersion",
             validationApi: "javax.validation:validation-api:$validationApiVersion"
     ]
+
+    webjars = [
+            webjarsLocator  : "org.webjars:webjars-locator:$webjarsLocatorVersion",
+            jquery          : "org.webjars:jquery:$jqueryVersion",
+            bootstrap       : "org.webjars:bootstrap:$bootstrapVersion",
+            bootstrapTable  : "org.webjars:bootstrap-table:$bootstrapTableVersion",
+            fontAwesome     : "org.webjars:font-awesome:$fontAwesomeVersion"
+    ]
 }
 
 dependencies {
@@ -74,52 +87,6 @@ dependencies {
             hibernate.validator,
             spring.data, spring.web, spring.webmvc, spring.contextSupport,
             spring.securityWeb, spring.securityTaglibs, spring.securityConfig,
-            others.servletApi, others.standard, others.validationApi
-
+            others.servletApi, others.standard, others.validationApi,
+            webjars.webjarsLocator, webjars.jquery, webjars.bootstrap, webjars.bootstrapTable, webjars.fontAwesome
 }
-
-task allDeps << {
-    description 'Task used to display dependencies for all modules in the project'
-
-    allprojects.each { p ->
-        println()
-        println " $p.name ".center(60, '*')
-        println()
-        configurations.all.findAll { !it.allDependencies.empty }.each { c ->
-            println " ${c.name} ".center(60, '-')
-            c.allDependencies.each { dep ->
-                println "$dep.group:$dep.name:$dep.version"
-            }
-            println "-" * 60
-        }
-    }
-
-}
-
-
-task allCompile << {
-    description 'Task used to compile all modules in the project without running tests'
-    allprojects.each { p ->
-        p.getTasksByName("clean", true).each { t ->
-            println "-> $p.name [CLEAN]"
-            t.execute();
-        }
-        p.getTasksByName("compileJava", true).each { t ->
-            println "-> $p.name [COMPILE]"
-            t.execute();
-        }
-        p.getTasksByName("classes", true).each { t ->
-            println "-> $p.name [CLASSES]"
-            t.execute();
-        }
-        p.getTasksByName("war", true).each { t ->
-            println "-> $p.name [WAR]"
-            t.execute();
-        }
-    }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.10'
-}
-

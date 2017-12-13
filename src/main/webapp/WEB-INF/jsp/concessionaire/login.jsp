@@ -20,9 +20,10 @@
     <!---- CSS ---->
 
     <!-- Bootstrap -->
-    <link href="<spring:url value="/resources/css/bootstrap/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<spring:url value="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />"
+          rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="<spring:url value="/resources/css/font-awesome/font-awesome.min.css" />"
+    <link href="<spring:url value="/webjars/font-awesome/4.7.0/css/font-awesome.min.css" />"
           rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="<spring:url value="/resources/css/concessionaire/base.css" />"
@@ -33,10 +34,10 @@
     <!---- JavaScript ---->
 
     <!-- jQuery -->
-    <script src="<spring:url value="/resources/js/jquery/jquery.min.js" />"></script>
+    <script src="<spring:url value="/webjars/jquery/3.2.1/jquery.min.js" />"></script>
 
     <!-- Bootstrap -->
-    <script src="<spring:url value="/resources/js/bootstrap/bootstrap.min.js" />"></script>
+    <script src="<spring:url value="/webjars/bootstrap/3.3.7/js/bootstrap.min.js" />"></script>
 
     <!---- END JavaScript ---->
 </head>

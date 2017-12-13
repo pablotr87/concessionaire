@@ -35,6 +35,7 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     private static final String RESOURCES_LOCATION = "/resources/";
     private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";
+    private static final String WEBJARS_HANDLER = "/webjars/**";
 
     private final UserRepository userRepository;
     private final MenuRepository menuRepository;
@@ -86,6 +87,8 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(RESOURCES_HANDLER)
                 .addResourceLocations(RESOURCES_LOCATION);
+        registry.addResourceHandler(WEBJARS_HANDLER)
+                .addResourceLocations("/webjars/");
     }
 
     @Override
@@ -119,10 +122,12 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new AccessControlInterceptor(userService(userRepository), localeResolver()))
                 .addPathPatterns("/**")
                 .excludePathPatterns(RESOURCES_HANDLER)
+                .excludePathPatterns(WEBJARS_HANDLER)
                 .excludePathPatterns("/general/**");
         registry.addInterceptor(new MenuInterceptor(menuService(menuRepository)))
                 .addPathPatterns("/**")
                 .excludePathPatterns(RESOURCES_HANDLER)
+                .excludePathPatterns(WEBJARS_HANDLER)
                 .excludePathPatterns("/general/**");
     }
 }

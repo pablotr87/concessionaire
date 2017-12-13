@@ -14,14 +14,14 @@
         </put-list-attribute>
 
         <put-list-attribute name="filesJS">
-            <add-attribute value="/resources/js/jquery/jquery.min.js"/>
-            <add-attribute value="/resources/js/bootstrap/bootstrap.min.js"/>
+            <add-attribute value="/webjars/jquery/3.2.1/jquery.min.js"/>
+            <add-attribute value="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"/>
             <add-attribute value="/resources/js/concessionaire/base.js"/>
         </put-list-attribute>
 
         <put-list-attribute name="filesCSS">
-            <add-attribute value="/resources/css/bootstrap/bootstrap.min.css"/>
-            <add-attribute value="/resources/css/font-awesome/font-awesome.min.css"/>
+            <add-attribute value="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+            <add-attribute value="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
             <add-attribute value="/resources/css/fonts/courgette.css" />
             <add-attribute value="/resources/css/concessionaire/base.css"/>
         </put-list-attribute>

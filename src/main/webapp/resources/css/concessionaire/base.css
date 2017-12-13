@@ -245,6 +245,11 @@ table.table thead {
     background-image: linear-gradient(to bottom, #00C3D2 0%, #126A94 100%); /* W3C Markup */
 }
 
+.bootstrap-table {
+    height: 530px;
+    overflow: auto;
+}
+
 /** /Tables **/
 
 .x_panel {

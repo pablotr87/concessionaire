@@ -1,6 +1,9 @@
 package com.ptirador.concessionaire.model;
 
 import com.ptirador.concessionaire.util.Constants;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +15,8 @@ import java.io.Serializable;
  * @author ptirador
  */
 @Document(collection = "users")
+@Getter
+@Setter
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,59 +30,8 @@ public class User implements Serializable {
 
     private String password;
 
-    private int role;
+    @Builder.Default
+    private int role = Constants.ROLE_USER_ID;
 
     private String language;
-
-    public User() {
-        setRole(Constants.ROLE_USER_ID);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 }

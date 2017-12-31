@@ -22,6 +22,7 @@ ext {
     hibernateVersion = '6.0.7.Final'
     poiVersion = '3.17'
     jacksonVersion = '2.9.3'
+    lombokVersion = '1.16.18'
     servletApiVersion = '4.0.0'
     taglibsVersion = '1.1.2'
     validationApiVersion = '2.0.1.Final'
@@ -38,6 +39,7 @@ ext {
             poiOoxml       : "org.apache.poi:poi-ooxml:$poiVersion",
             jacksonCore    : "com.fasterxml.jackson.core:jackson-core:$jacksonVersion",
             jacksonDatabind: "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            lombok         : "org.projectlombok:lombok:$lombokVersion"
     ]
 
     hibernate = [
@@ -70,7 +72,7 @@ ext {
 }
 
 dependencies {
-    compile misc.jstl, misc.tilesJsp, misc.poi, misc.poiOoxml, misc.jacksonCore, misc.jacksonDatabind,
+    compile misc.jstl, misc.tilesJsp, misc.poi, misc.poiOoxml, misc.jacksonCore, misc.jacksonDatabind, misc.lombok,
             hibernate.validator,
             spring.data, spring.web, spring.webmvc, spring.contextSupport,
             spring.securityWeb, spring.securityTaglibs, spring.securityConfig,

@@ -179,7 +179,7 @@ public class AuthController {
         } else {
             // Password encryption
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            boolean resultOk = userService.insertUser(user) > 0;
+            boolean resultOk = userService.insertUser(user) != null;
             if (resultOk) {
                 resultPage = Constants.REDIRECT + URL_LOGIN;
                 rda.addFlashAttribute(Constants.MSG, MSG_SIGNUP_OK);

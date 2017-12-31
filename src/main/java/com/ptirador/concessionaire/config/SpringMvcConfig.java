@@ -31,7 +31,7 @@ import java.util.Locale;
         "com.ptirador.concessionaire.security"})
 @EnableWebMvc
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SpringMvcConfig extends WebMvcConfigurerAdapter {
+public class SpringMvcConfig implements WebMvcConfigurer {
 
     private static final String RESOURCES_LOCATION = "/resources/";
     private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";

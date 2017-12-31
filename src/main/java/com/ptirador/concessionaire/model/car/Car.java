@@ -1,10 +1,10 @@
 package com.ptirador.concessionaire.model.car;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,13 +24,13 @@ public class Car {
     /**
      * Make name.
      */
-    @NotEmpty(message = "{error.mandatoryField}")
+    @NotBlank(message = "{error.mandatoryField}")
     private String make;
 
     /**
      * Model name.
      */
-    @NotEmpty(message = "{error.mandatoryField}")
+    @NotBlank(message = "{error.mandatoryField}")
     private String model;
 
     /**

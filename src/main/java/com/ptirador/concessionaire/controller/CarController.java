@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Home controller.
@@ -97,12 +98,12 @@ public class CarController extends BaseController<Car> {
     @GetMapping(URL_CARS_DETAIL)
     public String getCarDetail(@PathVariable String id,
                                Model model) {
-        Car car = carService.findById(id);
-        if (null == car) {
+        Optional<Car> car = carService.findById(id);
+        if (!car.isPresent()) {
             throw new ResourceNotFoundException();
         }
 
-        model.addAttribute(MDL_CAR, car);
+        model.addAttribute(MDL_CAR, car.get());
         return VIEW_CAR_DETAIL;
     }
 

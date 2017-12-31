@@ -1,6 +1,5 @@
 package com.ptirador.concessionaire.config;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -62,7 +61,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
     @Override
     @Bean
-    public Mongo mongo() throws Exception {
+    public MongoClient mongoClient() {
         ServerAddress serverAddress = new ServerAddress(dbHost, dbPort);
         return new MongoClient(serverAddress, getCredentialsList());
     }

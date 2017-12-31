@@ -3,6 +3,7 @@ package com.ptirador.concessionaire.service.car;
 import com.ptirador.concessionaire.model.car.Car;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface service for car management.
@@ -34,7 +35,7 @@ public interface CarService {
      * @param id car identificator.
      * @return car with the corresponding id.
      */
-    Car findById(String id);
+    Optional<Car> findById(String id);
 
     /**
      * Saves a car object.
